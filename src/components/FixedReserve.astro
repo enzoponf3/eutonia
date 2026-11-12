@@ -1,0 +1,61 @@
+---
+import { ACTIONS } from "../lib/site";
+---
+
+<a
+  data-reserve-fab
+  href={ACTIONS.primary.href}
+  class="fixed-reserve reserve-pulse fixed right-5 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-40 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-white shadow-lg shadow-primary/30 transition duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:right-8 sm:bottom-[max(2rem,env(safe-area-inset-bottom))] border"
+  aria-label="Reservar una clase"
+>
+  {ACTIONS.primary.label}
+</a>
+
+<script>
+  const button = document.querySelector<HTMLAnchorElement>(
+    "[data-reserve-fab]",
+  );
+
+  if (button) {
+    const plans = document.getElementById("reservar");
+    let plans_fully_visible = false;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const at_top = window.scrollY <= 80;
+      button.classList.toggle(
+        "is-visible",
+        !at_top && !plans_fully_visible,
+      );
+    };
+
+    const request_update = () => {
+      if (!frame) {
+        frame = requestAnimationFrame(update);
+      }
+    };
+
+    if (plans) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const fully_visible = entry.intersectionRatio >= 0.99;
+            const fills_viewport =
+              entry.boundingClientRect.height >= window.innerHeight &&
+              entry.intersectionRect.height >= window.innerHeight - 1;
+            plans_fully_visible =
+              entry.isIntersecting && (fully_visible || fills_viewport);
+          }
+          update();
+        },
+        { threshold: [0, 0.5, 0.99, 1] },
+      );
+      observer.observe(plans);
+    }
+
+    window.addEventListener("scroll", request_update, { passive: true });
+    window.addEventListener("resize", request_update);
+    update();
+  }
+</script>

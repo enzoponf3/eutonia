@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Description from "../components/Description.astro";
+import Gerda from "../components/Gerda.astro";
+import Plans from "../components/Plans.astro";
+import Location from "../components/Location.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<Layout title="">
+  <Hero />
+  <Description />
+  <Gerda />
+  <Plans />
+  <Location />
+  <Contact />
+
+  <script>
+    const revealTargets = document.querySelectorAll(".gerda-reveal");
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      revealTargets.forEach((el) => el.classList.add("visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+
+      revealTargets.forEach((el) => observer.observe(el));
+    }
+  </script>
+</Layout>

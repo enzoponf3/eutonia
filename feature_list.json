@@ -1,0 +1,196 @@
+{
+    "project": "eutonia",
+    "description": "Website for a eutony specialist facilitator business. ",
+    "rules": {
+        "one_feature_at_a_time": true,
+        "require_tests_to_close": true,
+        "valid_status": [
+            "pending",
+            "in_progress",
+            "done",
+            "blocked"
+        ]
+    },
+    "features": [
+        {
+            "id": 1,
+            "name": "project_scaffolding",
+            "title": "Scaffold Astro + Tailwind + Vitest",
+            "description": "Bootstrap the eutonia website with the latest Astro, Tailwind CSS and Vitest, wired through the project harness.",
+            "acceptance": [
+                "package.json defines astro, tailwindcss, @tailwindcss/vite and vitest",
+                "astro.config.mjs registers the Tailwind Vite plugin",
+                "src/pages/index.astro renders a landing page through a shared layout",
+                "tests/ contains a Vitest suite and `npm test` passes",
+                "./init.sh finishes with exit code 0"
+            ],
+            "status": "done"
+        },
+        {
+            "id": 2,
+            "name": "style",
+            "title": "Styles and vibe",
+            "description": "Set the preferences for styles and vibes in the web",
+            "acceptance": [
+                "The website if focused in a relaxed and mindful physical and spiritual treatment following the eutonic teachings.",
+                "The primary color is #5c5f3f followed by #3f5c5f and #5f3f5c",
+                "The font must be a formal one sometimes mixed with something more organic in some places.",
+                "The primary action will be 'Reservar' followed by 'Contacto'",
+                "Public: People from Buenos Aires in search of whole body-mind treatment.",
+                "Title: Eutonia... y algo más",
+                "Traffic: Instagram, Google search, Google maps",
+                "Mobile priority: Yes"
+            ],
+            "status": "done"
+        },
+        {
+            "id": 3,
+            "name": "header",
+            "title": "Header ",
+            "description": "Create the header",
+            "acceptance": [
+                "The logo is in 'public/logo.svg' and it is in the header of the page",
+                "The header contains 3 sections. Inicio, Sobre mí, Contacto, Reservar "
+            ],
+            "status": "done"
+        },
+        {
+            "id": 4,
+            "name": "first_section",
+            "title": "First section",
+            "description": "Create the first section that the user will see.",
+            "acceptance": [
+                "The first section will contain the picture 'public/photos/start.jpg'",
+                "Aligned to the left will be a short text of about 50 words to encourage and inspire people to listen to their body.",
+                "This section will cover the starting 100% of the screen."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 5,
+            "name": "first_section_fix",
+            "title": "First section fix",
+            "description": "Fix little details.",
+            "acceptance": [
+                "The fonts are not shown in the web",
+                "Align the text to the right of the photo",
+                "Make sure the hight of the first section and the header is exactly 100hv"
+            ],
+            "status": "done"
+        },
+        {
+            "id": 6,
+            "name": "description",
+            "title": "Description with icons",
+            "description": "Show how it work and what to expect from the practice.",
+            "acceptance": [
+                "Add a section that contain 3 boxes",
+                "The boxes contain an icon a title and a short text",
+                "1st box: icon: public/meditation.svg. title: '¿Que es?'.text:  'Una disciplina de trabajo corporal conciente nacida en occidente con el espíritu  de oriente.'.",
+                "2nd box: icon: public/grow.svg . title:'¿Cuál es su objetivo?'. text:'Que aprendas a regular tu tono corporal, tu estado de tensión. Sintiendo y observando tu cuerpo'.",
+                "3rd box: icon: public/mind.svg. title:'¿Qué efectos tiene?'. text:'Disminuye el estrés regula la respiración y el ritmo cardíaco. Se integra cuerpo, mente, emoción.'."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 7,
+            "name": "gerda",
+            "title": "Photo and prase of Alexander Gerda",
+            "description": "Show a quote from the inventor of the discipline.",
+            "acceptance": [
+                "Add a section with a photo and quote from Gerda Alexander.",
+                "The photo is in public/photos/gerda.webp",
+                "The quote will be : Es preciso aprender cada día un poco más que somos ese cuerpo en el cual podemos apoyarnos. "
+            ],
+            "status": "done"
+        },
+        {
+            "id": 8,
+            "name": "animations",
+            "title": "Animations",
+            "description": "Add animations to te home page",
+            "acceptance": [
+                "Add animations to the homepage, the animations should be aligned to the vibe of the page.",
+                "The hero text should have an animation at when the page is loaded",
+                "The gerda section should have animations, for both the text and the picture. The picture animation should start and end, then the text should apear "
+            ],
+            "status": "done"
+        },
+        {
+            "id": 9,
+            "name": "plans",
+            "title": "Plans",
+            "description": "Add the plans that the user can choose from.",
+            "acceptance": [
+                "Add at least 3 boxes to display the available plans to take the courses.",
+                "Show the title big enough to draw attention, 'Lugar' where this is happening, 'horario' days and hours, and how many times per month. At the end add buttons to 'Reservar' use the other colors to emphasize and make it more appealing",
+                "The provisory plans will be: Online, Mensual, 1 Clase. You can fill the other details for now."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 10,
+            "name": "location",
+            "title": "Location",
+            "description": "Add a map where this is happening",
+            "acceptance": [
+                "The title of this section will be '¿Dónde nos encontramos?'",
+                "Add a map from google maps to show the location where the encounters are happening",
+                "In one of the sides add the direction of just the text with a nice design. The direction is: Gymdance. Gral. Lavalle 2993, Victoria, Provincia de Buenos Aires"
+            ],
+            "status": "done"
+        },
+        {
+            "id": 11,
+            "name": "contact",
+            "title": "Contact",
+            "description": "Add the contact action buttons",
+            "acceptance": [
+                "Add a section to contact the facilitator",
+                "A button will take you to the whatsapp chat with the facilitator in a new tab.",
+                "The mobile number is +54 9 11 4060-9024",
+                "Modify the contact button in the header to perform the same action, to this button ad some stile but keep in mind this is the second most important action."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 12,
+            "name": "eutonia",
+            "title": "Eutonia",
+            "description": "Add a new page: Eutonía.",
+            "acceptance": [
+                "Add a new nav button: Eutonía, it will take you to a new page that explains what eutonia is.",
+                "Add a new page: eutonia.",
+                "Centered and at the top will be an image located in public/full-tree.svg",
+                "After the image wil begin the explanation in detail of what it is and how it was conceived. Mix images, sublines, colors and abstract patterns to the text to make dynamic, refreshing and interesting."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 13,
+            "name": "about",
+            "title": "About",
+            "description": "Add a new page: Sobre mí.",
+            "acceptance": [
+                "Use the 'Sobre mí' nav button to go to the Sobre mí page.",
+                "Add a new page: Sobre mí.",
+                "At the top left corner will be an image of the facilitator, at is right will start the text that will explain who this person is, their carreer journey and how them found and became involved with the eutonic practice. Mix images, sublines, colors and abtrasct patterns to the text to make dynamic, refreshing and interesting."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 14,
+            "name": "fixed-button",
+            "title": "'Reservar' button",
+            "description": "Add a button with the primary action shown in every page.",
+            "acceptance": [
+                "Add a fixed button to 'Reservar'",
+                "The button will draw attention.",
+                "The button will be shown on every page, with two exceptions, when the scrollbar is at the top and when the plans are fully in the view. ",
+                "Modify the 'Reservar' nav button to mach the fixed one and style them both to make sure the user understands that this is the primary action",
+                "The fixed and nav buttons will take to the plans section in the home page."
+            ],
+            "status": "done"
+        }
+    ]
+}
