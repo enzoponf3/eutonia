@@ -6,6 +6,7 @@ export const SITE = {
   location: "Buenos Aires",
   audience:
     "Personas de Buenos Aires en búsqueda de un tratamiento integral de cuerpo y mente.",
+  phone: "+54 9 11 4060-9024",
 } as const;
 
 export const ACTIONS = {
@@ -14,10 +15,10 @@ export const ACTIONS = {
 } as const;
 
 export const HERO = {
-  image: "/photos/start.jpg",
-  image_alt: "Persona durante una sesión de eutonía",
+  image: "/photos/inicio-3.webp",
+  image_alt: "Espacio de práctica de eutonía",
   text:
-    "Tu cuerpo habla en un idioma suave. La eutonía te invita a detenerte, respirar y escuchar esa voz que sostiene tu equilibrio. A través del movimiento consciente y el contacto atento, recuperás la calma, la presencia y el tono justo para habitar tu cuerpo y tu mente con bienestar.",
+    "El cuerpo habla sutilmente... La eutonía y la meditación te invitan a detenerte; calmar tu mente y escuchar tu cuerpo. A través del movimiento consciente y el contacto atento recuperás la flexibilidad y el tono corporal que necesitas para tu vida diaria. Menos tensión, más bienestar.",
 } as const;
 
 export const DESCRIPTION = {
@@ -28,20 +29,20 @@ export const DESCRIPTION = {
       icon: "/selflove.svg",
       title: "¿Qué es?",
       text:
-        "Eutonía es una disciplina de trabajo corporal consciente. Creada por Gerda Alexander.",
+        "Eutonía es una disciplina de conciencia corporal creada por Gerda Alexander.",
     },
     {
       icon: "/grow.svg",
       title: "¿Cuál es su objetivo?",
       text:
-        "Que aprendas a regular tu tono corporal para que sea adecuado a la actividad que estás realizando." + "A través de la sensación y la observación de tu propio cuerpo.",
+        "Que aprendas a regular tu tono corporal, sintiendo y observando tu propio cuerpo, " + "para realizar las actividades cotidianas con menos gasto de energía.",
     },
     {
       icon: "/mind.svg",
       title: "¿Qué efectos tiene?",
       text:
-      "Regulación del tono corporal, mental y emocional: " +
-"El cuerpo descansa y se regenera, la mente se centra en el momento presente, la regulación del estado de alerta da lugar a la emoción"
+      "Al regularse el tono corporal, mental y emocional disminuye el estrés y la ansiedad. " +
+"El movimiento se torna más liviano, sin dolor ni inflamación en los tejidos. " + "Mejora el descanso. Conectás con tu interior."
     },
   ],
 } as const;
@@ -61,8 +62,9 @@ export const GERDA = {
 export const LOCATION = {
   eyebrow: "El espacio",
   title: "¿Dónde nos encontramos?",
-  place: "Gymdance",
-  address: "Gral. Lavalle 2993, Victoria, Provincia de Buenos Aires",
+  place: "Clases Grupales.",
+  address: "GymDance Gral. Lavalle 2993, Victoria, Provincia de Buenos Aires. " + 
+  "Con reserva previa.",
   map_url:
     "https://www.google.com/maps?q=Gral.+Lavalle+2993,+Victoria,+Provincia+de+Buenos+Aires&output=embed",
   directions_url:
@@ -76,7 +78,7 @@ export const CONTACT = {
     "Las dudas también son parte del proceso. Escribime y te acompaño " +
     "a encontrar la forma de empezar a escucharte.",
   phone: "+54 9 11 4060-9024",
-  whatsapp_url: build_whatsapp_url("+54 9 11 4060-9024"),
+  whatsapp_url: build_whatsapp_url(SITE.phone),
 } as const;
 
 export const EUTONIA = {
@@ -90,11 +92,9 @@ export const EUTONIA = {
     "Ilustración de un árbol de raíces profundas, símbolo del cuerpo " +
     "que se sostiene y se expande.",
   intro:
-    "La eutonía es una disciplina de educación corporal consciente que " +
-    "trabaja con la percepción, el tono muscular y la respiración. No busca " +
-    "corregir el cuerpo desde afuera, sino despertar la escucha desde " +
-    "adentro para recuperar el equilibrio entre cuerpo, mente y emoción.",
-  statement: "El tono justo no se fuerza: se descubre.",
+    "La eutonía disciplina de conciencia corporal, destinada a desarrollar la auto-observación a través de las sensaciones corporales reales. " +
+    "No busca corregir el cuerpo desde afuera, sino despertar la escucha interna para lograr un movimiento flexible, integrado y orgánico, sin dolor.",
+  statement:"La búsqueda de un tono corporal justo.",
   sections: [
     {
       eyebrow: "El nombre",
@@ -102,15 +102,15 @@ export const EUTONIA = {
       paragraphs: [
         "La palabra reúne dos términos griegos: eu, que habla de lo bueno, " +
           "armónico o justo, y tonos, que refiere al tono o la tensión del " +
-          "cuerpo. Eutonía es, entonces, la búsqueda de una tensión armoniosa: " +
-          "ni rígida ni ausente.",
-        "En la práctica se observa cómo el tono cambia con la respiración, " +
-          "el contacto, la postura y el estado emocional. Aprender a regularlo " +
-          "es aprender a regular la manera en que el cuerpo responde al mundo.",
+          "cuerpo. Eutonía es, entonces, la búsqueda de un tono corporal justo para la actividad que se realiza.",
+        "Se logra con la observación de los Principios Eutónicos. Distintas conciencias que se exploran a través de actividades de sensopercepción: " +
+          "Conciencia de la piel, del espacio interno, del tejido óseo entre otros. " +
+          "El contacto conciente y la neutralidad son dos aspectos que invitan a observar sin juicios hacia uno mismo. " +
+          "De la integración de los Principios surge el Movimiento Eutónico es orgánico, armonioso, propio de cada persona.",
       ],
-      image: HERO.image,
+      image: "/photos/espacio.webp",
       image_alt: HERO.image_alt,
-      image_caption: "Un cuerpo disponible, atento y sin esfuerzo innecesario.",
+      image_caption: "",
       image_width: 1600,
       image_height: 1067,
       image_aspect: "aspect-[4/3]",
@@ -119,20 +119,18 @@ export const EUTONIA = {
       eyebrow: "El origen",
       title: "Cómo nació",
       paragraphs: [
-        "Gerda Alexander nació en Wuppertal, Alemania, en 1908 y desarrolló " +
-          "su trabajo en Dinamarca. A partir de su propia experiencia corporal " +
-          "y de años de observación, sistematizó una práctica que unía la " +
-          "conciencia del movimiento con el cuidado de la salud.",
-        "A mediados del siglo XX dio forma a la eutonía como una disciplina " +
-          "abierta: se enseña y se practica en grupos y sesiones individuales, " +
-          "y dialoga con la educación, el arte, la salud y la vida cotidiana.",
-        "Su legado no es una técnica rígida, sino una invitación a investigar " +
-          "el propio cuerpo con curiosidad y respeto, sin comparaciones ni " +
-          "exigencias de rendimiento.",
+        "Gerda Alexander nació en Wuppertal, Alemania, en 1908 y desarrolló su trabajo en Dinamarca. " +
+        "A partir de su propia experiencia corporal y de años de observación, " + 
+        "en la búsqueda del movimiento auténtico y propio para cada persona: orgáncio y armonioso.",
+        "Hacia 1945 le pone el nombre de EUTONÍA a su método; es mucho más que una disciplina de conciencia corporal, es una filosofía de vida. " + 
+        "Su práctica puede ser en modalidad grupal como clases o como tratamiento personalizado " +
+        "donde el eutonista realiza distintos toques con el objetivo de facilitar el " + "contacto del alumno con su propio cuerpo y regular su tono. Eutonía dialoga con la educación, el arte, la salud.",
+        "Su legado es una invitación a investigar el propio cuerpo con " + 
+        "curiosidad y respeto, sin juicios ni exigencias.",
       ],
-      image: GERDA.image,
-      image_alt: GERDA.image_alt,
-      image_caption: "Gerda Alexander, creadora de la eutonía.",
+      image: "/photos/eutonia-gerda.jpg",
+      image_alt: "Gerda en posición de meditación.",
+      image_caption: "Gerda Alexander (1908-1994)",
       image_width: 330,
       image_height: 330,
       image_aspect: "aspect-square",
@@ -140,28 +138,28 @@ export const EUTONIA = {
   ],
   principles: {
     eyebrow: "La práctica",
-    title: "Tres gestos que sostienen el trabajo",
+    title: "Tres pilares que sostiene la vivencia",
     items: [
       {
         icon: "/meditation.svg",
-        title: "Escuchar",
+        title: "Auto-observación",
         text:
-          "La atención se posa en las sensaciones sin juzgarlas. " +
-          "Aparece un mapa del cuerpo más fino y más amable.",
+          "de las sensaciones corporales reales; " + 
+          "el cuerpo se presenta como un territorio a explorar y descubrir",
       },
       {
         icon: "/grow.svg",
-        title: "Regular el tono",
+        title: "Neutralidad",
         text:
-          "Con movimientos lentos y contacto consciente se ajusta la " +
-          "tensión justa para cada gesto, sin forzar ni abandonar.",
+          "para observar libremente sin juicios de valor; " + 
+          "lo que surge de la vivencia es información que se integra",
       },
       {
         icon: "/mind.svg",
-        title: "Volver al presente",
+        title: "Presencia",
         text:
-          "La respiración y la percepción anclan la atención en el aquí. " +
-          "Cuerpo, mente y emoción vuelven a encontrarse.",
+          "las actividades invitan a focalizar en el aquí y ahora; " + 
+          "se aprecia un estado de calma y seguridad",
       },
     ],
   },
@@ -176,74 +174,69 @@ export const EUTONIA = {
 
 export const ABOUT = {
   eyebrow: "Sobre mí",
-  title: "Acompañar el cuerpo, sostener la escucha",
-  image: "/photos/facilitator.svg",
-  image_alt: "Ilustración de la facilitadora de eutonía",
-  image_caption: "Facilitadora de eutonía en Buenos Aires",
+  title: "Acompañar en la búsqueda del bienestar",
+  image: "/photos/sobre-mi.webp",
+  image_alt: "Fotografía de la facilitadora de eutonía",
+  image_caption: "Observar, escuchar y acompañar",
   intro:
-    "Soy facilitadora de eutonía y acompaño a personas que quieren habitar " +
-    "su cuerpo con más calma, atención y libertad. Mi trabajo nace de una " +
-    "convicción simple: cuando el cuerpo se escucha, la vida cotidiana " +
-    "encuentra otro ritmo.",
+    "Soy facilitadora de Eutonía y Meditación, acompaño a personas que buscan conectar " + 
+    "con sí mismas y con su corporalidad. Estoy convenciada que el bienestar " + 
+    "se encuentra en la integración cuerpo, mente y emoción. " + 
+    "Alinear estos aspectos nos da consciencia y libertad.",
   journey: {
     eyebrow: "Mi recorrido",
     paragraphs: [
-      "Llegué a la eutonía después de un camino por distintas disciplinas " +
-        "del movimiento y del cuidado corporal. En cada una fui buscando lo " +
-        "mismo: una forma de estar presente sin forzar, de habitar el cuerpo " +
-        "sin pelear con él.",
-      "La eutonía apareció como una síntesis posible. Me ofreció un lenguaje " +
-        "para entender el tono, la respiración y la percepción, y también una " +
-        "manera de acompañar a otras personas sin imponer un modelo.",
-      "Desde entonces me formo y practico con la idea de que cada proceso es " +
-        "único. Acompaño sesiones individuales y encuentros grupales en " +
-        "Buenos Aires, integrando la escucha corporal con recursos simples " +
-        "para el día a día.",
+      "Mi nombre es Andrea Bello, soy kinesiología desde hace más de 20 años. " + 
+      "Mi recorrido comienza en el Hospital Argerich en CABA, Argentina, mi lugar de formación. " + 
+      "Allí me desempeñé en distintas áreas como internación, unidad de cuidados intensivos y consultorio.",
+      "La Eutonía llegó a mi vida al buscar comprender y aliviar el dolor de mis pacientes, " + 
+      "hace 14 años. Descubrí los inmumerables beneficios de su práctica... " + 
+      "también me di cuenta que primero tenía que trabajar en mí. La Meditación vino " + "después, con la Pandemia, me ayudó a cultivar el estado de presencia y el silencio interno para escuchar mi interior. ",
+      "Ambas disciplinas cambiaron mi manera de observar, escuchar y acompañar. " + 
+      "Cada persona es única y su proceso de recuperación también.",
     ],
   },
   approach: {
     eyebrow: "Cómo trabajo",
     title: "Un espacio para volver a habitarse",
     paragraphs: [
-      "Propongo encuentros donde el tiempo se vuelve más lento. A través de " +
-        "movimientos suaves, contacto consciente y atención a la respiración, " +
-        "buscamos soltar los excesos de tensión y recuperar la disponibilidad " +
-        "del cuerpo.",
-      "No hace falta experiencia previa ni una condición física especial. " +
-        "Cada persona llega con su historia y encuentra su propio ritmo.",
+      "Propongo encuentros para conectar y sentir, " + "donde el tiempo interno es el protagonista. A través de las actividades de sensopercepción, " + 
+      "de movimientos suaves y en contacto consciente, buscamos soltar los excesos " + 
+      "de tensión y recuperar flexibilidad y disponibilidad corporal.",
+      "No se necesita tener experiencia previa ni una condición física especial. " + "Cada persona llega con su historia y encuentra su propio ritmo.",
     ],
-    image: HERO.image,
+    image: "/photos/espacio-2.jpg",
     image_alt: "Sala preparada para una práctica de eutonía",
     image_caption: "Un espacio cuidado para la práctica.",
   },
   values: {
     eyebrow: "La mirada",
-    title: "Lo que sostiene cada encuentro",
+    title: "En cada encuentro vas a encontrar",
     items: [
       {
         icon: "/selflove.svg",
-        title: "Escucha",
+        title: "Escucha atenta",
         text:
-          "Cada cuerpo trae su propio lenguaje. Acompaño sin anticipar " +
-          "respuestas ni comparar procesos.",
+          "Cada persona tiene su propio tiempo. " + 
+          "Te acompaño en el proceso de autoconocimiento.",
       },
       {
         icon: "/grow.svg",
         title: "Presencia",
         text:
-          "El trabajo sucede en el aquí. La respiración y la percepción " +
-          "abren la puerta a un estado más disponible.",
+          "El centramiento en el propio cuerpo trae a la persona al aquí y ahora. " + 
+          "Mas disponibilidad, menos ansiedad.",
       },
       {
         icon: "/meditation.svg",
         title: "Cuidado",
         text:
-          "Sin exigencias de rendimiento. El ritmo lo marca cada persona, " +
-          "y el espacio está preparado para sostenerlo.",
+          "Cada persona investiga como puede y hasta donde puede, " + 
+          "respetanto sus propios tiempos.",
       },
     ],
   },
-  statement: "No se trata de corregir el cuerpo, sino de aprender a escucharlo.",
+  statement: "Cada persona es única en su proceso de recuperación",
   cta: {
     eyebrow: "El próximo encuentro",
     title: "¿Querés empezar?",
@@ -266,23 +259,74 @@ export const PLANS = {
   subtitle: "Horario y frecuencias",
   items: [
     {
+      label: "Presencial",
+      description: "Práctica presencial grupal.",
+      frequency: "4 encuentros por mes.",
+      link: 
+      {
+        label: "Reservar",
+        enlace: "#"
+      }
+    },
+    {
+      label: "Tratamiento",
+      description: "Individual en consultorio.",
+      frequency: "A convenir.",
+      link: 
+      {
+        label: "Reservar",
+        enlace: build_whatsapp_url(SITE.phone)
+      }
+    },
+    {
       label: "Online",
-      description: "Accede desde cualquier lugar",
-      frequency: "Ilimitado por mes",
-    },
-    {
-      label: "Mensual",
-      description: "Práctica presencial mensual",
-      frequency: "8 sesiones por mes",
-    },
-    {
-      label: "1 Clase",
-      description: "Una sola sesión suelta",
-      frequency: "1 clase",
+      description: "Sincrónica grupal.",
+      frequency: "4 encuentros por mes.",
+      link: 
+      {
+        label: "Reservar",
+        enlace: "#"
+      }
     },
   ],
   reservarHref: "#reservar",
 } as const;
+
+
+export const REVIEWS = {
+  eyebrow: "Testimonios",
+  title: "Lo que cuentan quienes practican",
+  items: [
+    {
+      name: "Mariana",
+      rating: 5,
+      comment:
+        "Es un espacio donde nos reencontramos con nuestro cuerpo " + 
+        "y en ese ratito nos dedicamos a escucharlo!" + 
+        "Hace dos años que comencé con Andre y fue la mejor experiencia ❤️❤️",
+    },
+    {
+      name: "Alejandra",
+      rating: 5,
+      comment:
+        "Quiero compartir mí experiencia habiendo participado en los encuentros de Eutonia y Meditación, " +
+        "a cargo de la Lic. Andrea Bello. Habitualmente llego al lugar muy cansada y estresada " + 
+        "luego de una semana difícil. Al finalizar, me doy cuenta que puedo recuperar, no solo la percepción de mí propio cuerpo, sino también la regulación de mis emociones." +
+        "Siendo una profesional de la salud mental, se lo importante que es equilibrarnos " + 
+        "y en estos encuentros lo logro con mucha paz y satisfacción. " + 
+        "Gracias por contenerme y mmarme en un espacio ideal y tan especial.",
+    },
+    {
+      name: "Mercedes",
+      rating: 5,
+      comment:
+        "La práctica de estonia me ayuda a regular el ánimo, la postura corporal, " + 
+        "el descubrimiento de los espacios internos. Con curiosidad y sutileza, " + 
+        "guiada por la sabiduría de Andrea.",
+    },
+  ],
+} as const;
+
 
 export function build_whatsapp_url(phone: string): string {
   const digits = phone.replace(/\D/g, "");

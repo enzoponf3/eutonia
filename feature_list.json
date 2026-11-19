@@ -191,6 +191,59 @@
                 "The fixed and nav buttons will take to the plans section in the home page."
             ],
             "status": "done"
+        },
+        {
+            "id": 15,
+            "name": "fix-tests",
+            "title": "Fix failing test",
+            "description": "Fix test",
+            "acceptance": [
+                "Fix the failing tests to match the updated version of the site data."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 16,
+            "name": "review-section",
+            "title": "Add a review section",
+            "description": "Add a Review section on the home page",
+            "acceptance": [
+                "Add a new section to show reviews.",
+                "The new section will be after the plans.",
+                "The section will show 3 reviews.",
+                "The reviews will have an icon of a person, a name, a 5-star rating and the comment."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 17,
+            "name": "animations",
+            "title": "Animations",
+            "description": "Add animations to te 'Eutonia' page",
+            "acceptance": [
+                "Add animations to the 'eutonia' page, the animations should be aligned to the vibe of the page.",
+                "The hero text should have an animation at when the page is loaded",
+                "All the sections should have animations, for both the text and the picture."
+            ],
+            "status": "done"
+        },
+        {
+            "id": 18,
+            "name": "review-section-edit",
+            "title": "Review section edit",
+            "description": "Style the review section differently",
+            "acceptance": [
+                "The review will be shown in a carrousel.",
+                "The carrousel will be infinite.",
+                "The carrousel will have at the bottom two arrows to move the current review",
+                "The right arrow will have the background of the accent color",
+                "The carrousel will not move automatically but with the arrows",
+                "The current review will be 60% width.",
+                "The current review will be scaled at 110",
+                "All reviews will be visible, but the two on the sides will have a horizontal fade.",
+                "All the items will be centered, the stars at the top, then the review and finally the icon next to the name"
+            ],
+            "status": "done"
         }
     ]
 }

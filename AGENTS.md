@@ -16,7 +16,8 @@ AGENTS.md
 | `progress/history.md`        | Append-only binnacle from previous sessions             | If historic context is needed |
 | `docs/architecture.md`       | The means of "make a good job" in this project    | Before implement |
 | `docs/conventions.md`        | Style rules, names, structure                     | Before write code |
-| `docs/verification.md`       | How to verify that your work works                    | Before change a task to `done` |
+| `docs/verification.md`       | How to verify that your work works                    | Before change a task to `done`                        |
+| `docs/comments.md`           | Static-friendly comments and alumni testimonials plan | Before implementing a comments section                |
 | `CHECKPOINTS.md`             | objective criteria of "correct final state"            | For auto-evaluation |
 | `.opencode/agents/`            | Subagents definitions (leader, implementer, reviewer) | If work is orchestrated |
 | `src/`                       | Application code                                   | To implement |

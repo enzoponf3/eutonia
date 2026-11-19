@@ -69,6 +69,11 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes revealFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .animate-hero {
   animation: heroFadeIn 1s ease-out both;
 }
@@ -112,6 +117,83 @@
 
 .js .gerda-reveal.visible .gerda-caption {
   animation: gerdaTextAppear 0.9s ease-out 1.8s forwards;
+}
+
+.reveal-anim {
+  opacity: 1;
+}
+
+.js .reveal-anim {
+  opacity: 0;
+}
+
+.js .reveal-anim.visible {
+  animation: revealFadeIn 0.8s ease-out forwards;
+}
+
+.reveal-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js .reveal-content {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.js .reveal-anim.visible .reveal-content {
+  animation: revealFadeIn 0.8s ease-out forwards;
+}
+
+.reviews-viewport {
+  position: relative;
+  overflow: hidden;
+  padding-block: 1.25rem;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 15%,
+    #000 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 15%,
+    #000 85%,
+    transparent 100%
+  );
+}
+
+.reviews-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.reviews-slide {
+  flex: 0 0 60%;
+  min-width: 0;
+  transform: scale(0.92);
+  opacity: 0.45;
+  transition:
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 550ms ease;
+}
+
+.reviews-carousel.is-resetting .reviews-track,
+.reviews-carousel.is-resetting .reviews-slide {
+  transition: none !important;
+}
+
+.reviews-slide.is-active {
+  position: relative;
+  z-index: 1;
+  transform: scale(1.1);
+  opacity: 1;
 }
 
 .fixed-reserve {
@@ -158,13 +240,20 @@
   .animate-hero,
   .js .gerda-reveal .gerda-img,
   .js .gerda-reveal .gerda-text,
-  .js .gerda-reveal .gerda-caption {
+  .js .gerda-reveal .gerda-caption,
+  .js .reveal-anim,
+  .reveal-content {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
 
   .fixed-reserve {
+    transition: none !important;
+  }
+
+  .reviews-track,
+  .reviews-slide {
     transition: none !important;
   }
 

@@ -102,6 +102,95 @@ describe("gerda section", () => {
   });
 });
 
+describe("reviews section", () => {
+  it("renders after the plans and before the location", () => {
+    const page = read_source("src/pages/index.astro");
+    expect(page.indexOf("<Reviews")).toBeGreaterThan(-1);
+    expect(page.indexOf("<Reviews")).toBeGreaterThan(page.indexOf("<Plans"));
+    expect(page.indexOf("<Reviews")).toBeLessThan(page.indexOf("<Location"));
+  });
+
+  it("renders the reviews inside a carousel track", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain("REVIEWS.items.map");
+    expect(reviews).toContain("data-reviews-carousel");
+    expect(reviews).toContain("data-reviews-track");
+    expect(reviews).toContain("data-reviews-slide");
+    expect(reviews).toContain("<ul");
+    expect(reviews).toContain("<li");
+    expect(reviews).toContain("slide.name");
+    expect(reviews).toContain("slide.comment");
+  });
+
+  it("repeats the reviews so the carousel loops in both directions", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain("const COPIES = 3");
+    expect(reviews).toContain("length: COPIES");
+    expect(reviews).toContain("index += real_count");
+    expect(reviews).toContain("index -= real_count");
+  });
+
+  it("moves only through the previous and next arrows", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain("data-reviews-prev");
+    expect(reviews).toContain("data-reviews-next");
+    expect(reviews).toContain('aria-label="Testimonio anterior"');
+    expect(reviews).toContain('aria-label="Testimonio siguiente"');
+    expect(reviews).not.toContain("setInterval");
+    expect(reviews).not.toContain("autoplay");
+  });
+
+  it("places stars, comment and author centered in that order", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain("items-center justify-center");
+    const stars = reviews.indexOf("data-reviews-stars");
+    const comment = reviews.indexOf("data-reviews-comment");
+    const author = reviews.indexOf("data-reviews-author");
+    expect(stars).toBeGreaterThan(-1);
+    expect(comment).toBeGreaterThan(stars);
+    expect(author).toBeGreaterThan(comment);
+  });
+
+  it("gives the next arrow the accent background", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    const next = reviews.indexOf("data-reviews-next");
+    const next_button = reviews.slice(next - 400, next + 600);
+    expect(next_button).toContain("bg-accent");
+  });
+
+  it("scales the active review to 60% width and fades the sides", () => {
+    const css = read_source("src/styles/global.css");
+    expect(css).toContain("flex: 0 0 60%");
+    expect(css).toContain("transform: scale(1.1)");
+    expect(css).toContain("mask-image");
+    expect(css).toContain(".reviews-slide.is-active");
+  });
+
+  it("lets every card size itself to its own content", () => {
+    const css = read_source("src/styles/global.css");
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(css).toContain("align-items: center");
+    expect(reviews).not.toContain('class="flex h-full');
+  });
+
+  it("re-normalises the loop without replaying the scale animation", () => {
+    const css = read_source("src/styles/global.css");
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain("is-resetting");
+    expect(reviews).toContain("requestAnimationFrame");
+    expect(css).toContain(".reviews-carousel.is-resetting");
+  });
+
+  it("shows a person icon and an accessible five star rating", () => {
+    const reviews = read_source("src/components/Reviews.astro");
+    expect(reviews).toContain('aria-hidden="true"');
+    expect(reviews).toContain("Array.from({ length: 5 })");
+    expect(reviews).toContain("star_index < slide.rating");
+    expect(reviews).toContain("de 5 estrellas");
+    expect(reviews).toContain("sr-only");
+  });
+});
+
 describe("location section", () => {
   it("renders after the plans", () => {
     const page = read_source("src/pages/index.astro");
@@ -319,5 +408,30 @@ describe("animations", () => {
     expect(css).toMatch(
       /prefers-reduced-motion: reduce[\s\S]*\.js \.gerda-reveal \.gerda-img/,
     );
+  });
+
+  it("adds reveal animations to the Eutonia page", () => {
+    const eutonia = read_source("src/pages/eutonia.astro");
+    expect(eutonia).toContain('class="relative overflow-hidden bg-stone-50 pt-32 pb-16 sm:pt-40 sm:pb-24"');
+    expect(eutonia).toContain("animate-hero");
+    expect(eutonia).toContain("animate-hero-delay-1");
+    expect(eutonia).toContain("animate-hero-delay-2");
+    expect(eutonia).toContain(".reveal-anim");
+    expect(eutonia).toContain(".reveal-content");
+
+    const css = read_source("src/styles/global.css");
+    expect(css).toContain(".reveal-anim");
+    expect(css).toContain(".reveal-content");
+    expect(css).toContain("@keyframes revealFadeIn");
+    expect(css).toContain("animation: revealFadeIn 0.8s ease-out forwards");
+  });
+
+  it("uses IntersectionObserver for reveal animations on the Eutonia page", () => {
+    const eutonia = read_source("src/pages/eutonia.astro");
+    expect(eutonia).toContain('const revealTargets = document.querySelectorAll(".reveal-anim")');
+    expect(eutonia).toContain("new IntersectionObserver");
+    expect(eutonia).toContain("{ threshold: 0.2 }");
+    expect(eutonia).toContain('observer.unobserve(entry.target)');
+    expect(eutonia).toContain("(prefers-reduced-motion: reduce)");
   });
 });

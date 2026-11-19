@@ -7,14 +7,25 @@ import { GERDA } from "../lib/site";
     <figure
       class="gerda-reveal grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center md:gap-16"
     >
+    <div>
+
       <img
-        src={GERDA.image}
+      src={GERDA.image}
         alt={GERDA.image_alt}
-        class="gerda-img mx-auto w-full max-w-sm rounded-2xl object-cover shadow-sm md:col-start-1 md:row-span-2"
+        class="gerda-img mx-auto w-full max-w-sm rounded-2xl object-cover shadow-sm md:col-start-1 md:row-span-2 -scale-x-100"
         width="330"
         height="330"
         loading="lazy"
       />
+      <figcaption
+      class="gerda-caption text-sm font-medium tracking-wide text-stone-500 uppercase md:col-start-2 mt-4 "
+      >
+      {GERDA.author}
+        <span class="block font-normal tracking-normal text-stone-400 normal-case">
+          {GERDA.role}
+        </span>
+      </figcaption>
+    </div>
       <div class="gerda-text md:col-start-2">
         <p class="font-organic text-3xl text-primary">{GERDA.eyebrow}</p>
         <blockquote
@@ -24,14 +35,6 @@ import { GERDA } from "../lib/site";
           <p>“{GERDA.quote}”</p>
         </blockquote>
       </div>
-      <figcaption
-        class="gerda-caption text-sm font-medium tracking-wide text-stone-500 uppercase md:col-start-2"
-      >
-        {GERDA.author}
-        <span class="block font-normal tracking-normal text-stone-400 normal-case">
-          {GERDA.role}
-        </span>
-      </figcaption>
     </figure>
   </div>
 </section>

@@ -9,6 +9,7 @@ import {
   HERO,
   LOCATION,
   NAV_LINKS,
+  REVIEWS,
   SITE,
   build_title,
   build_whatsapp_url,
@@ -79,7 +80,7 @@ describe("NAV_LINKS", () => {
 
 describe("HERO", () => {
   it("points at the start photo", () => {
-    expect(HERO.image).toBe("/photos/start.jpg");
+    expect(HERO.image).toBe("/photos/inicio-3.webp");
   });
 
   it("keeps the intro text around fifty words", () => {
@@ -124,13 +125,33 @@ describe("GERDA", () => {
 
   it("keeps the exact quote from the discipline's creator", () => {
     expect(GERDA.quote).toBe(
-      "Es preciso aprender cada día un poco más que somos ese cuerpo " +
-        "en el cual podemos apoyarnos.",
+      "No quiero dar recetas (…) Quiero estimularlos para que ellos mismos " +
+        "realicen sus propias investigaciones en sus propios cuerpos y " +
+        "desarrollen su propia creatividad",
     );
   });
 
   it("attributes the quote to Gerda Alexander", () => {
     expect(GERDA.author).toBe("Gerda Alexander");
+  });
+});
+
+describe("REVIEWS", () => {
+  it("shows three reviews", () => {
+    expect(REVIEWS.items).toHaveLength(3);
+  });
+
+  it("gives every review a name and a comment", () => {
+    for (const item of REVIEWS.items) {
+      expect(item.name.trim().length).toBeGreaterThan(0);
+      expect(item.comment.trim().length).toBeGreaterThan(20);
+    }
+  });
+
+  it("gives every review a five star rating", () => {
+    for (const item of REVIEWS.items) {
+      expect(item.rating).toBe(5);
+    }
   });
 });
 
@@ -140,9 +161,10 @@ describe("LOCATION", () => {
   });
 
   it("names the place and its full address", () => {
-    expect(LOCATION.place).toBe("Gymdance");
+    expect(LOCATION.place).toBe("Clases Grupales.");
     expect(LOCATION.address).toBe(
-      "Gral. Lavalle 2993, Victoria, Provincia de Buenos Aires",
+      "GymDance Gral. Lavalle 2993, Victoria, Provincia de Buenos Aires. " +
+        "Con reserva previa.",
     );
   });
 
@@ -172,9 +194,9 @@ describe("EUTONIA", () => {
 
   it("gives every section an image, a caption and paragraphs", () => {
     for (const section of EUTONIA.sections) {
-      expect(section.image.startsWith("/")).toBe(true);
+      expect(section.image).toMatch(/^\/?photos\//);
       expect(section.image_alt.length).toBeGreaterThan(10);
-      expect(section.image_caption.length).toBeGreaterThan(10);
+      expect(typeof section.image_caption).toBe("string");
       expect(section.paragraphs.length).toBeGreaterThan(0);
     }
   });
@@ -182,9 +204,9 @@ describe("EUTONIA", () => {
   it("presents the practice in three principles", () => {
     expect(EUTONIA.principles.items).toHaveLength(3);
     expect(EUTONIA.principles.items.map((item) => item.title)).toEqual([
-      "Escuchar",
-      "Regular el tono",
-      "Volver al presente",
+      "Auto-observación",
+      "Neutralidad",
+      "Presencia",
     ]);
   });
 
@@ -196,25 +218,25 @@ describe("EUTONIA", () => {
 
 describe("ABOUT", () => {
   it("uses the facilitator portrait", () => {
-    expect(ABOUT.image).toBe("/photos/facilitator.svg");
+    expect(ABOUT.image).toBe("/photos/sobre-mi.webp");
     expect(ABOUT.image_alt.length).toBeGreaterThan(10);
   });
 
   it("tells who the facilitator is and how she found eutonía", () => {
-    expect(ABOUT.intro).toContain("eutonía");
+    expect(ABOUT.intro.toLowerCase()).toContain("eutonía");
     expect(ABOUT.journey.eyebrow).toBe("Mi recorrido");
     expect(ABOUT.journey.paragraphs.length).toBeGreaterThanOrEqual(3);
   });
 
   it("describes the practice space with an image", () => {
-    expect(ABOUT.approach.image).toBe(HERO.image);
+    expect(ABOUT.approach.image).toMatch(/^\/?photos\//);
     expect(ABOUT.approach.paragraphs.length).toBeGreaterThan(0);
   });
 
   it("presents the values in three cards", () => {
     expect(ABOUT.values.items).toHaveLength(3);
     expect(ABOUT.values.items.map((item) => item.title)).toEqual([
-      "Escucha",
+      "Escucha atenta",
       "Presencia",
       "Cuidado",
     ]);

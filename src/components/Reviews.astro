@@ -1,0 +1,257 @@
+---
+import { REVIEWS } from "../lib/site";
+
+const COPIES = 3;
+const REVIEW_COUNT = REVIEWS.items.length;
+
+const SLIDES = Array.from({ length: COPIES }, () =>
+  REVIEWS.items.map((item, item_index) => ({
+    ...item,
+    item_index,
+  })),
+).flat();
+---
+
+<section id="testimonios" class="scroll-mt-28 overflow-hidden bg-accent/5 py-16 sm:py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-organic text-3xl text-accent">{REVIEWS.eyebrow}</p>
+      <h2
+        class="mt-2 text-3xl font-semibold text-balance text-stone-900 sm:text-4xl"
+      >
+        {REVIEWS.title}
+      </h2>
+    </div>
+
+    <div
+      class="reviews-carousel mt-12"
+      data-reviews-carousel
+      data-reviews-count={REVIEW_COUNT}
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label="Testimonios"
+    >
+      <div class="reviews-viewport" data-reviews-viewport>
+        <ul class="reviews-track" role="list" data-reviews-track>
+          {
+            SLIDES.map((slide, index) => (
+              <li
+                class:list={[
+                  "reviews-slide",
+                  index === REVIEW_COUNT && "is-active",
+                ]}
+                data-reviews-slide
+                data-review-name={slide.name}
+                aria-hidden={index === REVIEW_COUNT ? "false" : "true"}
+              >
+                <article class="flex flex-col items-center justify-center gap-5 rounded-3xl border border-accent/15 bg-white/95 px-4 py-8 text-center shadow-sm sm:px-10 sm:py-10">
+                  <div
+                    class="flex items-center gap-1 text-accent"
+                    data-reviews-stars
+                  >
+                    {Array.from({ length: 5 }).map((_, star_index) => (
+                      <svg
+                        class:list={[
+                          "h-5 w-5",
+                          star_index < slide.rating
+                            ? "fill-current"
+                            : "fill-stone-200",
+                        ]}
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    ))}
+                    <span class="sr-only">{slide.rating} de 5 estrellas</span>
+                  </div>
+
+                  <blockquote
+                    class="flex-1 text-base leading-relaxed text-pretty text-stone-600 sm:text-lg"
+                    data-reviews-comment
+                  >
+                    <p>“{slide.comment}”</p>
+                  </blockquote>
+
+                  <div
+                    class="flex items-center justify-center gap-3"
+                    data-reviews-author
+                  >
+                    <span
+                      class:list={[
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
+                        slide.item_index === 0
+                          ? "bg-primary/10 text-primary"
+                          : slide.item_index === 1
+                            ? "bg-secondary/10 text-secondary"
+                            : "bg-accent/10 text-accent",
+                      ]}
+                      aria-hidden="true"
+                    >
+                      <svg
+                        class="h-5 w-5"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                      </svg>
+                    </span>
+                    <p class="text-lg font-semibold text-stone-900">
+                      {slide.name}
+                    </p>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="mt-6 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          data-reviews-prev
+          aria-label="Testimonio anterior"
+          class="flex h-12 w-12 items-center justify-center rounded-full border border-primary/40 text-primary transition duration-300 hover:bg-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-reduce:transition-none"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M15 5l-7 7 7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <button
+          type="button"
+          data-reviews-next
+          aria-label="Testimonio siguiente"
+          class="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white shadow-md shadow-accent/30 transition duration-300 hover:bg-accent/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none"
+        >
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M9 5l7 7-7 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+
+      <p class="sr-only" aria-live="polite" data-reviews-status></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-reviews-carousel]").forEach((root) => {
+    const track = root.querySelector<HTMLElement>("[data-reviews-track]");
+    const viewport = root.querySelector<HTMLElement>("[data-reviews-viewport]");
+    const previous = root.querySelector<HTMLButtonElement>("[data-reviews-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-reviews-next]");
+    const status = root.querySelector<HTMLElement>("[data-reviews-status]");
+    const reduce_motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!track || !viewport || !previous || !next) return;
+
+    const slides = Array.from(
+      track.querySelectorAll<HTMLElement>("[data-reviews-slide]"),
+    );
+    const real_count = Number(root.getAttribute("data-reviews-count") ?? 1);
+
+    if (slides.length === 0 || real_count <= 0) return;
+
+    let index = real_count;
+    let settling = false;
+    let settle_timer = 0;
+
+    const center = () => {
+      const slide = slides[index];
+      if (!slide) return;
+      const offset =
+        slide.offsetLeft + slide.offsetWidth / 2 - viewport.clientWidth / 2;
+      track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    };
+
+    const highlight = () => {
+      slides.forEach((slide, slide_index) => {
+        const active = slide_index === index;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+
+      if (status) {
+        const name = slides[index]?.getAttribute("data-review-name");
+        status.textContent = name ? `Testimonio de ${name}` : "";
+      }
+    };
+
+    const render = (animate: boolean) => {
+      if (animate) {
+        root.classList.remove("is-resetting");
+      } else {
+        root.classList.add("is-resetting");
+        track.style.transition = "none";
+      }
+
+      center();
+      highlight();
+
+      if (!animate) {
+        void track.offsetWidth;
+        window.requestAnimationFrame(() => {
+          root.classList.remove("is-resetting");
+          track.style.transition = "";
+        });
+      }
+    };
+
+    const normalize = () => {
+      if (index < real_count) index += real_count;
+      else if (index >= real_count * 2) index -= real_count;
+    };
+
+    const settle = () => {
+      window.clearTimeout(settle_timer);
+      settling = false;
+      normalize();
+      render(false);
+    };
+
+    const go = (step: number) => {
+      if (reduce_motion.matches) {
+        index += step;
+        normalize();
+        render(false);
+        return;
+      }
+
+      if (settling) return;
+
+      settling = true;
+      index += step;
+      render(true);
+      settle_timer = window.setTimeout(settle, 650);
+    };
+
+    previous.addEventListener("click", () => go(-1));
+    next.addEventListener("click", () => go(1));
+
+    track.addEventListener("transitionend", (event) => {
+      if (
+        settling &&
+        event.target === track &&
+        (event as TransitionEvent).propertyName === "transform"
+      ) {
+        settle();
+      }
+    });
+
+    window.addEventListener("resize", () => render(false));
+
+    render(false);
+  });
+</script>
