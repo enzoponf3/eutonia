@@ -92,7 +92,7 @@ export const EUTONIA = {
     "Ilustración de un árbol de raíces profundas, símbolo del cuerpo " +
     "que se sostiene y se expande.",
   intro:
-    "La eutonía disciplina de conciencia corporal, destinada a desarrollar la auto-observación a través de las sensaciones corporales reales. " +
+    "Disciplina de conciencia corporal, destinada a desarrollar la auto-observación a través de las sensaciones corporales reales. " +
     "No busca corregir el cuerpo desde afuera, sino despertar la escucha interna para lograr un movimiento flexible, integrado y orgánico, sin dolor.",
   statement:"La búsqueda de un tono corporal justo.",
   sections: [
@@ -141,21 +141,21 @@ export const EUTONIA = {
     title: "Tres pilares que sostiene la vivencia",
     items: [
       {
-        icon: "/meditation.svg",
+        icon: "/icon.svg",
         title: "Auto-observación",
         text:
           "de las sensaciones corporales reales; " + 
           "el cuerpo se presenta como un territorio a explorar y descubrir",
       },
       {
-        icon: "/grow.svg",
+        icon: "/icon.svg",
         title: "Neutralidad",
         text:
           "para observar libremente sin juicios de valor; " + 
           "lo que surge de la vivencia es información que se integra",
       },
       {
-        icon: "/mind.svg",
+        icon: "/icon.svg",
         title: "Presencia",
         text:
           "las actividades invitan a focalizar en el aquí y ahora; " + 
@@ -187,8 +187,10 @@ export const ABOUT = {
     eyebrow: "Mi recorrido",
     paragraphs: [
       "Mi nombre es Andrea Bello, soy kinesiología desde hace más de 20 años. " + 
-      "Mi recorrido comienza en el Hospital Argerich en CABA, Argentina, mi lugar de formación. " + 
+      "Mi recorrido comienza en el hospital público, en CABA, Argentina. " + 
       "Allí me desempeñé en distintas áreas como internación, unidad de cuidados intensivos y consultorio.",
+      "Actualmente integro el equipo del Centro de Salud 41, salud pública en CABA. " + 
+      "Me dedico al abordaje del dolor crónico. ",
       "La Eutonía llegó a mi vida al buscar comprender y aliviar el dolor de mis pacientes, " + 
       "hace 14 años. Descubrí los inmumerables beneficios de su práctica... " + 
       "también me di cuenta que primero tenía que trabajar en mí. La Meditación vino " + "después, con la Pandemia, me ayudó a cultivar el estado de presencia y el silencio interno para escuchar mi interior. ",
@@ -214,21 +216,21 @@ export const ABOUT = {
     title: "En cada encuentro vas a encontrar",
     items: [
       {
-        icon: "/selflove.svg",
+        icon: "/love.png",
         title: "Escucha atenta",
         text:
           "Cada persona tiene su propio tiempo. " + 
           "Te acompaño en el proceso de autoconocimiento.",
       },
       {
-        icon: "/grow.svg",
+        icon: "/love.png",
         title: "Presencia",
         text:
           "El centramiento en el propio cuerpo trae a la persona al aquí y ahora. " + 
           "Mas disponibilidad, menos ansiedad.",
       },
       {
-        icon: "/meditation.svg",
+        icon: "/love.png",
         title: "Cuidado",
         text:
           "Cada persona investiga como puede y hasta donde puede, " + 

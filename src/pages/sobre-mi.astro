@@ -5,30 +5,15 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
 
 <Layout title="Sobre mí" description={ABOUT.intro}>
   <article>
-    <section
-      class="relative overflow-hidden bg-stone-50 pt-32 pb-16 sm:pt-40 sm:pb-24"
-    >
+    <section class="relative overflow-hidden bg-stone-50 pt-32 pb-16 sm:pt-40 sm:pb-24">
       <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div
-          class="absolute -left-24 top-28 h-72 w-72 rounded-full border border-primary/15"
-        >
-        </div>
-        <div
-          class="absolute -right-20 top-10 h-56 w-56 rounded-full bg-secondary/5"
-        >
-        </div>
-        <div
-          class="absolute -right-8 top-44 h-24 w-24 rounded-full border border-accent/20"
-        >
-        </div>
+        <div class="absolute -left-24 top-28 h-72 w-72 rounded-full border border-primary/15"></div>
+        <div class="absolute -right-20 top-10 h-56 w-56 rounded-full bg-secondary/5"></div>
+        <div class="absolute -right-8 top-44 h-24 w-24 rounded-full border border-accent/20"></div>
       </div>
-      <div
-        class="relative mx-auto grid max-w-5xl items-start gap-10 px-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-16"
-      >
+      <div class="relative mx-auto grid max-w-5xl items-start gap-10 px-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-16">
         <figure class="mx-auto w-full max-w-sm md:mx-0">
-          <div
-            class="overflow-hidden rounded-2xl border border-primary/15 shadow-sm"
-          >
+          <div class="overflow-hidden rounded-2xl border border-primary/15 shadow-sm">
             <img
               src={ABOUT.image}
               alt={ABOUT.image_alt}
@@ -38,17 +23,13 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
               fetchpriority="high"
             />
           </div>
-          <figcaption
-            class="mt-3 text-sm font-medium tracking-wide text-stone-500"
-          >
+          <figcaption class="mt-3 text-sm font-medium tracking-wide text-stone-500">
             {ABOUT.image_caption}
           </figcaption>
         </figure>
         <div>
           <p class="font-organic text-3xl text-secondary">{ABOUT.eyebrow}</p>
-          <h1
-            class="mt-2 text-4xl font-semibold text-balance text-stone-900 sm:text-5xl"
-          >
+          <h1 class="mt-2 text-4xl font-semibold text-balance text-stone-900 sm:text-5xl">
             {ABOUT.title}
           </h1>
           <p class="mt-6 text-lg leading-relaxed text-pretty text-stone-600">
@@ -57,13 +38,11 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
           <p class="mt-8 font-organic text-3xl text-primary">
             {ABOUT.journey.eyebrow}
           </p>
-          {
-            ABOUT.journey.paragraphs.map((paragraph) => (
-              <p class="mt-3 text-base leading-relaxed text-pretty text-stone-600">
-                {paragraph}
-              </p>
-            ))
-          }
+          {ABOUT.journey.paragraphs.map((paragraph) => (
+            <p class="mt-3 text-base leading-relaxed text-pretty text-stone-600">
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </section>
@@ -78,39 +57,25 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
 
     <section class="relative overflow-hidden bg-stone-50 py-16 sm:py-24">
       <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div
-          class="absolute -left-24 bottom-10 h-64 w-64 rounded-full border border-secondary/15"
-        >
-        </div>
-        <div
-          class="absolute -left-6 bottom-32 h-24 w-24 rounded-full bg-primary/5"
-        >
-        </div>
+        <div class="absolute -left-24 bottom-10 h-64 w-64 rounded-full border border-secondary/15"></div>
+        <div class="absolute -left-6 bottom-32 h-24 w-24 rounded-full bg-primary/5"></div>
       </div>
-      <div
-        class="relative mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-2 md:gap-16"
-      >
+      <div class="relative mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-2 md:gap-16">
         <div>
           <p class="font-organic text-3xl text-primary">
             {ABOUT.approach.eyebrow}
           </p>
-          <h2
-            class="mt-2 text-3xl font-semibold text-balance text-stone-900 sm:text-4xl"
-          >
+          <h2 class="mt-2 text-3xl font-semibold text-balance text-stone-900 sm:text-4xl">
             {ABOUT.approach.title}
           </h2>
-          {
-            ABOUT.approach.paragraphs.map((paragraph) => (
-              <p class="mt-4 text-base leading-relaxed text-pretty text-stone-600">
-                {paragraph}
-              </p>
-            ))
-          }
+          {ABOUT.approach.paragraphs.map((paragraph) => (
+            <p class="mt-4 text-base leading-relaxed text-pretty text-stone-600">
+              {paragraph}
+            </p>
+          ))}
         </div>
         <figure class="relative">
-          <div
-            class="overflow-hidden rounded-2xl border border-primary/15 shadow-sm"
-          >
+          <div class="overflow-hidden rounded-2xl border border-primary/15 shadow-sm">
             <img
               src={ABOUT.approach.image}
               alt={ABOUT.approach.image_alt}
@@ -120,9 +85,7 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
               loading="lazy"
             />
           </div>
-          <figcaption
-            class="mt-3 text-sm font-medium tracking-wide text-stone-500"
-          >
+          <figcaption class="mt-3 text-sm font-medium tracking-wide text-stone-500">
             {ABOUT.approach.image_caption}
           </figcaption>
         </figure>
@@ -135,59 +98,42 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
           <p class="font-organic text-3xl text-primary">
             {ABOUT.values.eyebrow}
           </p>
-          <h2
-            class="mt-2 text-3xl font-semibold text-balance text-stone-900 sm:text-4xl"
-          >
+          <h2 class="mt-2 text-3xl font-semibold text-balance text-stone-900 sm:text-4xl">
             {ABOUT.values.title}
           </h2>
         </div>
         <div class="mt-12 grid gap-6 md:grid-cols-3">
-          {
-            ABOUT.values.items.map((item) => (
-              <article
-                class="rounded-2xl border border-primary/10 bg-stone-50 p-6 text-center"
-              >
-                <span class="relative mx-auto flex h-20 w-20 items-center justify-center">
-                  <span class="absolute h-14 w-14 rounded-full bg-primary/10" />
-                  <img
-                    src={item.icon}
-                    alt=""
-                    aria-hidden="true"
-                    class="relative h-16 w-16 object-contain"
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                  />
-                </span>
-                <h3 class="mt-4 text-xl font-semibold text-stone-900">
-                  {item.title}
-                </h3>
-                <p class="mt-2 text-base leading-relaxed text-pretty text-stone-600">
-                  {item.text}
-                </p>
-              </article>
-            ))
-          }
+          {ABOUT.values.items.map((item) => (
+            <article class="rounded-2xl border border-primary/10 bg-stone-50 p-6 text-center">
+              <span class="relative mx-auto flex h-20 w-20 items-center justify-center">
+                <span class="absolute h-10 w-10 rounded-full bg-primary/10" />
+                <img
+                  src={item.icon}
+                  alt=""
+                  aria-hidden="true"
+                  class="relative h-16 w-16 object-contain"
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                />
+              </span>
+              <h3 class="mt-4 text-xl font-semibold text-stone-900">
+                {item.title}
+              </h3>
+              <p class="mt-2 text-base leading-relaxed text-pretty text-stone-600">
+                {item.text}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
 
-    <section
-      class="relative overflow-hidden bg-primary py-16 text-white sm:py-24"
-    >
+    <section class="relative overflow-hidden bg-primary py-16 text-white sm:py-24">
       <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-        <div
-          class="absolute -left-20 -top-16 h-64 w-64 rounded-full border border-white/15"
-        >
-        </div>
-        <div
-          class="absolute -right-16 bottom-0 h-72 w-72 rounded-full border border-white/10"
-        >
-        </div>
-        <div
-          class="absolute left-1/3 top-6 h-20 w-20 rounded-full bg-white/10"
-        >
-        </div>
+        <div class="absolute -left-20 -top-16 h-64 w-64 rounded-full border border-white/15"></div>
+        <div class="absolute -right-16 bottom-0 h-72 w-72 rounded-full border border-white/10"></div>
+        <div class="absolute left-1/3 top-6 h-20 w-20 rounded-full bg-white/10"></div>
       </div>
       <div class="relative mx-auto max-w-3xl px-6 text-center">
         <p class="font-organic text-3xl text-white/80">{ABOUT.cta.eyebrow}</p>
@@ -197,9 +143,7 @@ import { ABOUT, ACTIONS, CONTACT } from "../lib/site";
         <p class="mt-4 text-lg leading-relaxed text-pretty text-white/85">
           {ABOUT.cta.text}
         </p>
-        <div
-          class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             class="inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-stone-100"
             href="/#reservar"
