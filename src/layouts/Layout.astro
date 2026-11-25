@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+import Contact from "../components/Contact.astro";
 import FixedReserve from "../components/FixedReserve.astro";
 import { SITE, build_title } from "../lib/site";
 
@@ -30,6 +31,7 @@ const { title = "", description = SITE.description } = Astro.props;
     <main>
       <slot />
     </main>
+    <Contact />
     <FixedReserve />
   </body>
 </html>

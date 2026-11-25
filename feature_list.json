@@ -244,6 +244,20 @@
                 "All the items will be centered, the stars at the top, then the review and finally the icon next to the name"
             ],
             "status": "done"
+        },
+        {
+            "id": 19,
+            "name": "instagram-link",
+            "title": "Instagram link",
+            "description": "Add a button to connect through instagram",
+            "acceptance": [
+                "The footer will have an instagram button.",
+                "The button will be at the right of the whatsapp button",
+                "The colors of the instagram button will be inverted in relation to the whatsapp button",
+                "It will have the corresponding icon",
+                "The link will be https://www.instagram.com/eutoniaymeditacion/"
+            ],
+            "status": "done"
         }
     ]
 }

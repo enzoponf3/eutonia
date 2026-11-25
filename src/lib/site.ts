@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Eutonia y meditación",
+  name: "Eutonía y meditación",
   short_name: "Eutonia",
   description:
     "Acompañamiento en eutonía en Buenos Aires para recuperar el equilibrio del cuerpo y la mente.",
@@ -41,7 +41,7 @@ export const DESCRIPTION = {
       icon: "/mind.svg",
       title: "¿Qué efectos tiene?",
       text:
-      "Al regularse el tono corporal, mental y emocional disminuye el estrés y la ansiedad. " +
+      "Al regular el tono corporal, mental y emocional disminuye el estrés y la ansiedad. " +
 "El movimiento se torna más liviano, sin dolor ni inflamación en los tejidos. " + "Mejora el descanso. Conectás con tu interior."
     },
   ],
@@ -79,6 +79,7 @@ export const CONTACT = {
     "a encontrar la forma de empezar a escucharte.",
   phone: "+54 9 11 4060-9024",
   whatsapp_url: build_whatsapp_url(SITE.phone),
+  instagram_url: "https://www.instagram.com/eutoniaymeditacion/",
 } as const;
 
 export const EUTONIA = {
@@ -186,7 +187,7 @@ export const ABOUT = {
   journey: {
     eyebrow: "Mi recorrido",
     paragraphs: [
-      "Mi nombre es Andrea Bello, soy kinesiología desde hace más de 20 años. " + 
+      "Mi nombre es Andrea Bello, soy kinesióloga desde hace más de 20 años. " + 
       "Mi recorrido comienza en el hospital público, en CABA, Argentina. " + 
       "Allí me desempeñé en distintas áreas como internación, unidad de cuidados intensivos y consultorio.",
       "Actualmente integro el equipo del Centro de Salud 41, salud pública en CABA. " + 
@@ -264,16 +265,20 @@ export const PLANS = {
       label: "Presencial",
       description: "Práctica presencial grupal.",
       frequency: "4 encuentros por mes.",
+      place:"Victoria.",
+      date:"Martes 19.30hs.",
       link: 
       {
         label: "Reservar",
-        enlace: "#"
+        enlace: "https://docs.google.com/forms/d/e/1FAIpQLScd7_wMQImM38RxWKZs40L9qIACyHyMwdRh4LYNIeg3H8SEiQ/viewform?usp=header"
       }
     },
     {
-      label: "Tratamiento",
-      description: "Individual en consultorio.",
-      frequency: "A convenir.",
+      label: "Tratamiento individual",
+      description: "Alivio del dolor crónico. ",
+      frequency: "Horario a convenir.",
+      place:"San Isidro.",
+      date:"",
       link: 
       {
         label: "Reservar",
@@ -284,10 +289,12 @@ export const PLANS = {
       label: "Online",
       description: "Sincrónica grupal.",
       frequency: "4 encuentros por mes.",
+      place:"Plataforma online",
+      date:"Miércoles 19hs.",
       link: 
       {
         label: "Reservar",
-        enlace: "#"
+        enlace: "https://docs.google.com/forms/d/e/1FAIpQLScd7_wMQImM38RxWKZs40L9qIACyHyMwdRh4LYNIeg3H8SEiQ/viewform?usp=header"
       }
     },
   ],
@@ -311,7 +318,7 @@ export const REVIEWS = {
       name: "Alejandra",
       rating: 5,
       comment:
-        "Quiero compartir mí experiencia habiendo participado en los encuentros de Eutonia y Meditación, " +
+        "Quiero compartir mí experiencia habiendo participado en los encuentros de Eutonía y Meditación, " +
         "a cargo de la Lic. Andrea Bello. Habitualmente llego al lugar muy cansada y estresada " + 
         "luego de una semana difícil. Al finalizar, me doy cuenta que puedo recuperar, no solo la percepción de mí propio cuerpo, sino también la regulación de mis emociones." +
         "Siendo una profesional de la salud mental, se lo importante que es equilibrarnos " + 

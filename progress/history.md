@@ -77,3 +77,94 @@ npm run build       : 3 pages built (index, eutonia, sobre-mi)
   re-normalisation now adds `is-resetting` (which disables track and slide transitions)
   and removes it on the next animation frame.
 - Verification: 101 tests passed, 0 check errors, 3 pages built, `./init.sh` exit 0.
+
+# Sync tests with updated site data (maintenance)
+
+**Date**: Tue Nov 24 2026
+
+## What changed:
+- `src/lib/site.ts` (user edit): plans now carry real booking links.
+  - `Presencial` and `Online` point to the Google Forms reservation URL.
+  - `Tratamiento` description mentions integrative kinesiology, chronic pain
+    and the San Isidro office.
+  - `Tratamiento` booking goes to the WhatsApp chat.
+- `tests/site.test.ts`: added a `PLANS` suite covering plan order, headings,
+  the updated treatment description, the form URL for group plans, the
+  WhatsApp link for the treatment, the action label and the frequencies.
+
+## Observation (not changed):
+- `src/components/Plans.astro` still renders every card button with
+  `href={PLANS.reservarHref}` (`#reservar`), so `link.enlace` is not used yet.
+  The data tests pin the URLs, but the UI does not consume them.
+
+## Verification Results:
+```
+./init.sh (with a node shim in WSL) : all checks passed
+vitest                              : 108 tests passed
+npm run check                       : 0 errors, 0 warnings, 0 hints
+npm run build                       : 3 pages built
+```
+
+# Instagram link (id: 19) — COMPLETED
+
+**Date**: Tue Nov 24 2026
+
+## What was implemented:
+- `src/lib/site.ts`: added `CONTACT.instagram_url`, pointing at
+  `https://www.instagram.com/eutoniaymeditacion/`.
+- `src/components/Footer.astro`: new footer with the brand name, site
+  description, a WhatsApp button and, to its right, an Instagram button.
+  - WhatsApp: `bg-white text-primary` with its icon.
+  - Instagram: `bg-primary text-white` (inverted) with its icon.
+  - Both open in a new tab with `noopener noreferrer`, have hover, active and
+    visible focus states, and respect `prefers-reduced-motion`.
+- `src/layouts/Layout.astro`: mounts `<Footer />` after `<main>` so every page
+  gets it.
+- Tests:
+  - `tests/site.test.ts`: asserts the Instagram profile URL.
+  - `tests/layout.test.ts`: footer mounted in the layout, WhatsApp and
+    Instagram links, button order, inverted colors and icons.
+
+## Acceptance:
+- Footer Instagram button: yes.
+- To the right of WhatsApp: DOM and flex order, verified in the built HTML.
+- Inverted colors: white/primary vs primary/white.
+- Corresponding icon: Instagram outline glyph, `aria-hidden`.
+- Link: exact profile URL.
+
+## Verification Results:
+```
+./init.sh (with a node shim in WSL) : all checks passed
+vitest                              : 114 tests passed
+npm run check                       : 0 errors, 0 warnings, 0 hints
+npm run build                       : 3 pages built (footer on all 3)
+```
+
+## Follow-up revision (same feature):
+- Removed `src/components/Footer.astro`. The footer is now the existing
+  `Contact` component.
+- `src/layouts/Layout.astro` imports and mounts `<Contact />` after `<main>`,
+  so every page shares it as the footer landmark.
+- `src/pages/index.astro` no longer imports or renders `<Contact />`; no other
+  page rendered it.
+- `src/components/Contact.astro` changed its root from `<section id="contacto">`
+  to `<footer id="contacto">` and now holds both actions side by side:
+  - WhatsApp: `bg-white text-primary`, to the left.
+  - Instagram: `bg-primary text-white` (inverted) plus a white ring for edge
+    separation, to the right.
+- Tests updated: footer mounting from the layout, no duplicate in the index
+  page, no standalone footer file, footer landmark, and Instagram position,
+  inverted colors, icon and new tab behaviour.
+- The built HTML has exactly one footer per page with WhatsApp before Instagram.
+
+## Verification Results:
+```
+./init.sh (with a node shim in WSL) : all checks passed
+vitest                              : 116 tests passed
+npm run check                       : 0 errors, 0 warnings, 0 hints
+npm run build                       : 3 pages built, one footer each
+```
+
+## Known follow-up (not part of this feature):
+- `src/components/Plans.astro` still ignores `item.link.enlace`; all card
+  buttons use `PLANS.reservarHref` (`#reservar`).

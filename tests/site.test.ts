@@ -9,6 +9,7 @@ import {
   HERO,
   LOCATION,
   NAV_LINKS,
+  PLANS,
   REVIEWS,
   SITE,
   build_title,
@@ -136,6 +137,56 @@ describe("GERDA", () => {
   });
 });
 
+describe("PLANS", () => {
+  it("lists the three plans in order", () => {
+    expect(PLANS.items.map((item) => item.label)).toEqual([
+      "Presencial",
+      "Tratamiento",
+      "Online",
+    ]);
+  });
+
+  it("uses the location and frequency headings", () => {
+    expect(PLANS.title).toBe("Lugar");
+    expect(PLANS.subtitle).toBe("Horario y frecuencias");
+  });
+
+  it("describes the integrative kinesiology treatment in San Isidro", () => {
+    const treatment = PLANS.items.find((item) => item.label === "Tratamiento");
+    expect(treatment?.description).toBe(
+      "Kinesiología integrativa - Alivio del dolor crónico. " +
+        "Individual en consultorio, San Isidro.",
+    );
+  });
+
+  it("sends the group plans to the reservation form", () => {
+    const form =
+      "https://docs.google.com/forms/d/e/1FAIpQLScd7_wMQImM38RxWKZs40L9qIACyHyMwdRh4LYNIeg3H8SEiQ/" +
+      "viewform?usp=header";
+    for (const label of ["Presencial", "Online"]) {
+      const plan = PLANS.items.find((item) => item.label === label);
+      expect(plan?.link.enlace).toBe(form);
+    }
+  });
+
+  it("sends the treatment booking to WhatsApp", () => {
+    const treatment = PLANS.items.find((item) => item.label === "Tratamiento");
+    expect(treatment?.link.enlace).toBe(CONTACT.whatsapp_url);
+  });
+
+  it("labels every plan action as Reservar", () => {
+    for (const plan of PLANS.items) {
+      expect(plan.link.label).toBe("Reservar");
+    }
+  });
+
+  it("keeps a frequency for every plan", () => {
+    for (const plan of PLANS.items) {
+      expect(plan.frequency.trim().length).toBeGreaterThan(0);
+    }
+  });
+});
+
 describe("REVIEWS", () => {
   it("shows three reviews", () => {
     expect(REVIEWS.items).toHaveLength(3);
@@ -255,6 +306,12 @@ describe("CONTACT", () => {
 
   it("builds a WhatsApp chat link for the number", () => {
     expect(CONTACT.whatsapp_url).toBe("https://wa.me/5491140609024");
+  });
+
+  it("links to the Instagram profile", () => {
+    expect(CONTACT.instagram_url).toBe(
+      "https://www.instagram.com/eutoniaymeditacion/",
+    );
   });
 });
 

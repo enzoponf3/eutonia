@@ -224,15 +224,36 @@ describe("location section", () => {
   });
 });
 
-describe("contact section", () => {
-  it("renders after the location", () => {
-    const page = read_source("src/pages/index.astro");
-    expect(page.indexOf("<Contact")).toBeGreaterThan(-1);
-    expect(page.indexOf("<Contact")).toBeGreaterThan(
-      page.indexOf("<Location"),
+describe("footer", () => {
+  it("uses the Contact component as the footer from the layout", () => {
+    const layout = read_source("src/layouts/Layout.astro");
+    expect(layout).toContain("<Contact />");
+    expect(layout).toContain(
+      'import Contact from "../components/Contact.astro"',
+    );
+    expect(layout.indexOf("<Contact />")).toBeGreaterThan(
+      layout.indexOf("<slot />"),
     );
   });
 
+  it("is not duplicated in the index page", () => {
+    const page = read_source("src/pages/index.astro");
+    expect(page).not.toContain("<Contact");
+    expect(page).not.toContain('components/Contact.astro');
+  });
+
+  it("does not ship a separate footer component", () => {
+    expect(existsSync(join(ROOT, "src/components/Footer.astro"))).toBe(false);
+  });
+
+  it("keeps the footer landmark and the contact anchor", () => {
+    const contact = read_source("src/components/Contact.astro");
+    expect(contact).toContain('<footer id="contacto"');
+    expect(contact).toContain("</footer>");
+  });
+});
+
+describe("contact section", () => {
   it("shows the facilitator number and a WhatsApp action", () => {
     const contact = read_source("src/components/Contact.astro");
     expect(contact).toContain("CONTACT.phone");
@@ -244,6 +265,58 @@ describe("contact section", () => {
     expect(contact).toContain("CONTACT.whatsapp_url");
     expect(contact).toContain('target="_blank"');
     expect(contact).toContain('rel="noopener noreferrer"');
+  });
+
+  it("shows the Instagram button after the WhatsApp button", () => {
+    const contact = read_source("src/components/Contact.astro");
+    expect(contact).toContain("CONTACT.instagram_url");
+    expect(contact.indexOf("CONTACT.instagram_url")).toBeGreaterThan(
+      contact.indexOf("CONTACT.whatsapp_url"),
+    );
+  });
+
+  it("inverts the Instagram colors against the WhatsApp button", () => {
+    const contact = read_source("src/components/Contact.astro");
+    const anchors = contact.match(/<a[\s\S]*?<\/a>/g) ?? [];
+    const whatsapp = anchors.find((anchor) =>
+      anchor.includes("CONTACT.whatsapp_url"),
+    );
+    const instagram = anchors.find((anchor) =>
+      anchor.includes("CONTACT.instagram_url"),
+    );
+
+    expect(whatsapp).toContain("bg-white");
+    expect(whatsapp).toContain("text-primary");
+    expect(instagram).toContain("bg-primary");
+    expect(instagram).toContain("text-white");
+  });
+
+  it("gives each button its own icon", () => {
+    const contact = read_source("src/components/Contact.astro");
+    const anchors = contact.match(/<a[\s\S]*?<\/a>/g) ?? [];
+    const whatsapp = anchors.find((anchor) =>
+      anchor.includes("CONTACT.whatsapp_url"),
+    );
+    const instagram = anchors.find((anchor) =>
+      anchor.includes("CONTACT.instagram_url"),
+    );
+
+    expect(whatsapp).toContain("<svg");
+    expect(whatsapp).toContain("WhatsApp");
+    expect(instagram).toContain("<svg");
+    expect(instagram).toContain("Instagram");
+    expect(instagram).toContain('aria-hidden="true"');
+  });
+
+  it("opens the Instagram profile in a new tab", () => {
+    const contact = read_source("src/components/Contact.astro");
+    const anchors = contact.match(/<a[\s\S]*?<\/a>/g) ?? [];
+    const instagram = anchors.find((anchor) =>
+      anchor.includes("CONTACT.instagram_url"),
+    );
+
+    expect(instagram).toContain('target="_blank"');
+    expect(instagram).toContain('rel="noopener noreferrer"');
   });
 
   it("turns the header Contacto link into a styled WhatsApp link", () => {
@@ -280,12 +353,12 @@ describe("eutonia page", () => {
     expect(page).toContain("md:order-2");
   });
 
-  it("closes with the principles and a reservation action", () => {
+  it("closes with the principles and leaves the contact to the layout footer", () => {
     const page = read_source("src/pages/eutonia.astro");
     expect(page).toContain("EUTONIA.principles.items");
-    expect(page).toContain("ACTIONS.primary.label");
-    expect(page).toContain('href="/#reservar"');
-    expect(page).toContain("CONTACT.whatsapp_url");
+    expect(page).not.toContain("ACTIONS.primary.label");
+    expect(page).not.toContain('href="/#reservar"');
+    expect(page).not.toContain("CONTACT.whatsapp_url");
   });
 
   it("marks the current page in the header navigation", () => {
@@ -324,11 +397,12 @@ describe("about page", () => {
     expect(existsSync(join(ROOT, "public/photos/facilitator.svg"))).toBe(true);
   });
 
-  it("closes with a reservation action", () => {
+  it("closes with the values and leaves the contact to the layout footer", () => {
     const page = read_source("src/pages/sobre-mi.astro");
-    expect(page).toContain("ACTIONS.primary.label");
-    expect(page).toContain('href="/#reservar"');
-    expect(page).toContain("CONTACT.whatsapp_url");
+    expect(page).toContain("ABOUT.values.items.map");
+    expect(page).not.toContain("ACTIONS.primary.label");
+    expect(page).not.toContain('href="/#reservar"');
+    expect(page).not.toContain("CONTACT.whatsapp_url");
   });
 });
 
