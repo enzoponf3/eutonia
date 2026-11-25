@@ -168,3 +168,73 @@ npm run build                       : 3 pages built, one footer each
 ## Known follow-up (not part of this feature):
 - `src/components/Plans.astro` still ignores `item.link.enlace`; all card
   buttons use `PLANS.reservarHref` (`#reservar`).
+
+# SEO week 1 quick wins (id: 20) — COMPLETED
+
+**Date**: Wed Nov 25 2026
+
+## What was implemented:
+- `astro.config.mjs`: production origin `https://eutonia.vercel.app`,
+  `trailingSlash: "never"` and the `@astrojs/sitemap` integration.
+- `vercel.json`: `trailingSlash: false` so slash variants redirect to the
+  no-slash canonical form at the edge.
+- `src/layouts/Layout.astro`: self-referencing canonical built from a trimmed
+  path, the full Open Graph and Twitter card tag sets, absolute social image
+  URLs, `og:url`/`twitter:url` matching the canonical, and `lang="es-AR"`.
+- `public/robots.txt`: allows crawling and points at the production sitemap.
+- `public/og/eutonia-meditacion.jpg`: verified 1200x630 JPEG social preview.
+- `src/components/Hero.astro` and `src/lib/site.ts`: the home brand line became
+  the single `<h1>`; dedicated home, Eutonía and Sobre mí titles/descriptions
+  follow the SEO report recommendations.
+- `tests/seo.test.ts`: new suite covering origin config, trailing-slash policy,
+  robots/sitemap, JPEG dimensions, layout head tags, one `h1` per page and
+  per-page metadata. `tests/site.test.ts` and `tests/layout.test.ts` were
+  updated alongside the implementation.
+
+## Acceptance:
+- Canonical URLs on every page: yes, emitted by the shared layout.
+- Open Graph and Twitter cards on every page: yes.
+- 1200x630 image served from `/og/`: yes.
+- robots.txt and generated sitemap: yes, `dist/sitemap-index.xml` and
+  `dist/sitemap-0.xml` list the three public pages.
+- Exactly one `h1` per built page: yes, verified in the built HTML.
+- Titles and descriptions rewritten: yes.
+- Trailing slashes normalised: yes, Astro policy plus Vercel redirect.
+- Test suite passes: yes.
+
+## Verification Results:
+```
+./init.sh (with a node shim in WSL) : all checks passed, 139 tests passed
+npm run check                       : 0 errors, 0 warnings, 0 hints
+npm run build                       : 3 pages built, sitemap generated
+built HTML                          : canonical == og:url == twitter:url on
+                                      all three pages, one h1 per page
+```
+
+## Manual follow-up (needs account access):
+- Verify Search Console and submit the sitemap.
+
+# OG image link follow-up (feature 20) - COMPLETED
+
+**Date**: Wed Nov 25 2026
+
+## What was done:
+- Regenerated `public/og/eutonia-meditacion.jpg` so the small website line
+  reads `eutoniaymeditacion.com.ar` instead of `eutonia.vercel.app`.
+- The image tool could not be used (insufficient OpenCode credits), so the
+  change was made locally with `sharp`: the old URL area was cloned from
+  nearby background rows and the new text drawn in the same style, size and
+  position. The rest of the design is unchanged.
+
+## Verification:
+```
+JPEG metadata                       : 1200x630
+vitest (social preview image test)  : passed
+visual inspection                   : correct URL, design preserved
+```
+
+## Note:
+The full suite is red because of three pre-existing `src/lib/site.ts` versus
+test-expectation mismatches (`home_title`, `HERO.title`) unrelated to this
+follow-up. Git Bash also cannot see `node` in this environment, so tests were
+run with `npm test` from PowerShell.

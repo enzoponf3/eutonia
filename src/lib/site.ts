@@ -1,8 +1,12 @@
 export const SITE = {
   name: "Eutonía y meditación",
   short_name: "Eutonia",
+  home_title: "Eutonía y meditación en Buenos Aires",
   description:
-    "Acompañamiento en eutonía en Buenos Aires para recuperar el equilibrio del cuerpo y la mente.",
+    "Clases de eutonía y meditación en Victoria y San Isidro. Tratamiento " +
+    "individual para el dolor crónico y encuentros online. Reservá tu lugar.",
+  og_image: "/og/eutonia-meditacion.jpg",
+  og_image_alt: "Eutonía y meditación en Buenos Aires",
   location: "Buenos Aires",
   audience:
     "Personas de Buenos Aires en búsqueda de un tratamiento integral de cuerpo y mente.",
@@ -17,6 +21,7 @@ export const ACTIONS = {
 export const HERO = {
   image: "/photos/inicio-3.webp",
   image_alt: "Espacio de práctica de eutonía",
+  title: "Eutonía y meditación",
   text:
     "El cuerpo habla sutilmente... La eutonía y la meditación te invitan a detenerte; calmar tu mente y escuchar tu cuerpo. A través del movimiento consciente y el contacto atento recuperás la flexibilidad y el tono corporal que necesitas para tu vida diaria. Menos tensión, más bienestar.",
 } as const;
@@ -85,6 +90,11 @@ export const CONTACT = {
 export const EUTONIA = {
   eyebrow: "La disciplina",
   title: "Eutonía",
+  seo_title: "Qué es la eutonía y cómo se practica",
+  seo_description:
+    "Descubrí qué es la eutonía, cómo nació y sus tres pilares: " +
+    "auto-observación, neutralidad y presencia. Práctica corporal en Buenos " +
+    "Aires. Clases y tratamiento.",
   subtitle:
     "Una práctica corporal que enseña a escuchar el cuerpo y a encontrar " +
     "el tono justo para habitarlo con calma.",
@@ -176,6 +186,10 @@ export const EUTONIA = {
 export const ABOUT = {
   eyebrow: "Sobre mí",
   title: "Acompañar en la búsqueda del bienestar",
+  seo_title: "Sobre mí: Andrea Bello, kinesióloga",
+  seo_description:
+    "Andrea Bello, kinesióloga con más de 20 años de experiencia, " +
+    "facilita eutonía y meditación en Buenos Aires. Conocé su recorrido y cómo trabaja.",
   image: "/photos/sobre-mi.webp",
   image_alt: "Fotografía de la facilitadora de eutonía",
   image_caption: "Observar, escuchar y acompañar",
@@ -347,5 +361,5 @@ export function build_whatsapp_url(phone: string): string {
 
 export function build_title(page_title: string): string {
   const trimmed = page_title.trim();
-  return trimmed.length === 0 ? SITE.name : `${trimmed} | ${SITE.name}`;
+  return trimmed.length === 0 ? SITE.home_title : `${trimmed} | ${SITE.name}`;
 }

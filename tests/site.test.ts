@@ -18,11 +18,29 @@ import {
 
 describe("SITE", () => {
   it("uses the brand title", () => {
-    expect(SITE.name).toBe("Eutonia y meditación");
+    expect(SITE.name).toBe("Eutonía y meditación");
+  });
+
+  it("uses a search-friendly home title", () => {
+    expect(SITE.home_title).toBe(
+      "Eutonía y meditación en Buenos Aires",
+    );
+    expect(SITE.home_title.length).toBeGreaterThanOrEqual(36);
+    expect(SITE.home_title.length).toBeLessThanOrEqual(60);
+  });
+
+  it("keeps the home description between 140 and 160 characters", () => {
+    expect(SITE.description.length).toBeGreaterThanOrEqual(140);
+    expect(SITE.description.length).toBeLessThanOrEqual(160);
   });
 
   it("targets people from Buenos Aires", () => {
     expect(SITE.location).toBe("Buenos Aires");
+  });
+
+  it("ships a 1200x630 social preview image", () => {
+    expect(SITE.og_image).toBe("/og/eutonia-meditacion.jpg");
+    expect(SITE.og_image_alt.length).toBeGreaterThan(10);
   });
 });
 
@@ -84,6 +102,10 @@ describe("HERO", () => {
     expect(HERO.image).toBe("/photos/inicio-3.webp");
   });
 
+  it("uses a local, descriptive heading", () => {
+    expect(HERO.title).toBe("Eutonía y meditación");
+  });
+
   it("keeps the intro text around fifty words", () => {
     const words = HERO.text.trim().split(/\s+/);
     expect(words.length).toBeGreaterThanOrEqual(40);
@@ -141,7 +163,7 @@ describe("PLANS", () => {
   it("lists the three plans in order", () => {
     expect(PLANS.items.map((item) => item.label)).toEqual([
       "Presencial",
-      "Tratamiento",
+      "Tratamiento individual",
       "Online",
     ]);
   });
@@ -151,12 +173,28 @@ describe("PLANS", () => {
     expect(PLANS.subtitle).toBe("Horario y frecuencias");
   });
 
-  it("describes the integrative kinesiology treatment in San Isidro", () => {
-    const treatment = PLANS.items.find((item) => item.label === "Tratamiento");
-    expect(treatment?.description).toBe(
-      "Kinesiología integrativa - Alivio del dolor crónico. " +
-        "Individual en consultorio, San Isidro.",
+  it("describes the individual treatment and its San Isidro location", () => {
+    const treatment = PLANS.items.find(
+      (item) => item.label === "Tratamiento individual",
     );
+    expect(treatment?.description.trim()).toBe("Alivio del dolor crónico.");
+    expect(treatment?.place).toBe("San Isidro.");
+  });
+
+  it("gives every plan a place", () => {
+    expect(PLANS.items.map((item) => item.place)).toEqual([
+      "Victoria.",
+      "San Isidro.",
+      "Plataforma online",
+    ]);
+  });
+
+  it("schedules both group plans", () => {
+    expect(PLANS.items.map((item) => item.date)).toEqual([
+      "Martes 19.30hs.",
+      "",
+      "Miércoles 19hs.",
+    ]);
   });
 
   it("sends the group plans to the reservation form", () => {
@@ -170,7 +208,9 @@ describe("PLANS", () => {
   });
 
   it("sends the treatment booking to WhatsApp", () => {
-    const treatment = PLANS.items.find((item) => item.label === "Tratamiento");
+    const treatment = PLANS.items.find(
+      (item) => item.label === "Tratamiento individual",
+    );
     expect(treatment?.link.enlace).toBe(CONTACT.whatsapp_url);
   });
 
@@ -236,6 +276,12 @@ describe("EUTONIA", () => {
     expect(EUTONIA.hero_image).toBe("/full-tree.svg");
   });
 
+  it("has its own search metadata", () => {
+    expect(EUTONIA.seo_title).toBe("Qué es la eutonía y cómo se practica");
+    expect(EUTONIA.seo_description.length).toBeGreaterThanOrEqual(140);
+    expect(EUTONIA.seo_description.length).toBeLessThanOrEqual(160);
+  });
+
   it("explains the name and the origin in two sections", () => {
     expect(EUTONIA.sections.map((section) => section.title)).toEqual([
       "¿Qué significa eutonía?",
@@ -271,6 +317,12 @@ describe("ABOUT", () => {
   it("uses the facilitator portrait", () => {
     expect(ABOUT.image).toBe("/photos/sobre-mi.webp");
     expect(ABOUT.image_alt.length).toBeGreaterThan(10);
+  });
+
+  it("has its own search metadata", () => {
+    expect(ABOUT.seo_title).toBe("Sobre mí: Andrea Bello, kinesióloga");
+    expect(ABOUT.seo_description.length).toBeGreaterThanOrEqual(140);
+    expect(ABOUT.seo_description.length).toBeLessThanOrEqual(160);
   });
 
   it("tells who the facilitator is and how she found eutonía", () => {
@@ -330,12 +382,12 @@ describe("build_whatsapp_url", () => {
 });
 
 describe("build_title", () => {
-  it("returns the site name when the page title is empty", () => {
-    expect(build_title("")).toBe(SITE.name);
+  it("returns the home title when the page title is empty", () => {
+    expect(build_title("")).toBe(SITE.home_title);
   });
 
-  it("returns the site name when the page title is only whitespace", () => {
-    expect(build_title("   ")).toBe(SITE.name);
+  it("returns the home title when the page title is only whitespace", () => {
+    expect(build_title("   ")).toBe(SITE.home_title);
   });
 
   it("appends the site name to a page title", () => {

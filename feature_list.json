@@ -258,6 +258,23 @@
                 "The link will be https://www.instagram.com/eutoniaymeditacion/"
             ],
             "status": "done"
+        },
+        {
+            "id": 20,
+            "name": "seo-week-1",
+            "title": "SEO week 1 quick wins",
+            "description": "Implement the first-week SEO improvements from docs/seo-report.md",
+            "acceptance": [
+                "The site origin is configured in Astro and every page has a canonical URL.",
+                "Open Graph and Twitter card tags are rendered on every page.",
+                "A 1200x630 social preview image is served from /og/.",
+                "robots.txt and a generated sitemap are available.",
+                "The home page has exactly one h1.",
+                "Titles and meta descriptions follow the report recommendations.",
+                "Trailing slashes are normalised and redirect to one canonical form.",
+                "The test suite passes."
+            ],
+            "status": "done"
         }
     ]
 }

@@ -224,6 +224,15 @@ describe("location section", () => {
   });
 });
 
+describe("plans section", () => {
+  it("renders the place, the date and the plan link from the data", () => {
+    const plans = read_source("src/components/Plans.astro");
+    expect(plans).toContain("item.place");
+    expect(plans).toContain("item.date");
+    expect(plans).toContain("item.link.enlace");
+  });
+});
+
 describe("footer", () => {
   it("uses the Contact component as the footer from the layout", () => {
     const layout = read_source("src/layouts/Layout.astro");
