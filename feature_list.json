@@ -275,6 +275,21 @@
                 "The test suite passes."
             ],
             "status": "done"
+        },
+        {
+            "id": 21,
+            "name": "modal",
+            "title": "Modal",
+            "description": "Implement a modal",
+            "acceptance": [
+                "The site will have a configurable modal",
+                "The modal will be centered and over a darker background",
+                "The modal can be closed by clicking an x button at the top right of the modal content",
+                "The modal can have an image, and at the right text if further details is necessary",
+                "The information can have a title, a description and a button",
+                "the information will only be shown in desktop view"
+            ],
+            "status": "done"
         }
     ]
 }

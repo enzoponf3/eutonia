@@ -1,0 +1,145 @@
+---
+import { MODAL } from "../lib/site";
+---
+
+{
+  MODAL.enabled && (
+    <dialog
+      class="promo-modal m-auto w-[min(92vw,60rem)] max-w-none overflow-hidden rounded-3xl border border-primary/15 bg-stone-50 p-0 text-stone-900 shadow-2xl shadow-stone-900/30"
+      data-modal
+      data-modal-storage={MODAL.storage_key}
+      data-modal-delay={MODAL.delay_ms}
+      data-modal-show-once={MODAL.show_once}
+      closedby="any"
+      aria-labelledby="promo-modal-title"
+      aria-describedby="promo-modal-description"
+    >
+      <form method="dialog" class="relative">
+        <button
+          type="submit"
+          value="close"
+          data-modal-close
+          aria-label="Cerrar"
+          class="absolute top-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-stone-900/80 text-white transition hover:bg-stone-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none"
+        >
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M6 6l12 12M18 6 6 18"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+        <div class="grid items-stretch md:grid-cols-2">
+          <img
+            src={MODAL.image}
+            alt={MODAL.image_alt}
+            class="h-auto w-full object-contain md:max-h-[85dvh]"
+            width="1080"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="hidden flex-col justify-center gap-5 p-8 md:flex sm:p-10">
+            <p class="font-organic text-3xl text-primary">{MODAL.eyebrow}</p>
+            <h2
+              id="promo-modal-title"
+              class="text-3xl font-semibold text-balance text-stone-900 sm:text-4xl"
+            >
+              {MODAL.title}
+            </h2>
+            <p
+              id="promo-modal-description"
+              class="text-base leading-relaxed text-pretty text-stone-600"
+            >
+              {MODAL.description}
+            </p>
+            <a
+              data-modal-cta
+              href={MODAL.cta.href}
+              class="inline-flex w-fit rounded-full bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm shadow-primary/25 transition hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none"
+            >
+              {MODAL.cta.label}
+            </a>
+          </div>
+        </div>
+      </form>
+    </dialog>
+  )
+}
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>("[data-modal]");
+
+  if (modal) {
+    const storage_key = modal.dataset.modalStorage ?? "";
+    const show_once = modal.dataset.modalShowOnce === "true";
+    const delay = Number(modal.dataset.modalDelay ?? "0");
+
+    const was_seen = () => {
+      if (!show_once || !storage_key) return false;
+      try {
+        return window.sessionStorage.getItem(storage_key) !== null;
+      } catch {
+        return false;
+      }
+    };
+
+    const remember = () => {
+      if (!show_once || !storage_key) return;
+      try {
+        window.sessionStorage.setItem(storage_key, "seen");
+      } catch {
+        // Storage can be unavailable when cookies are blocked.
+      }
+    };
+
+    const open = () => {
+      if (modal.open) return;
+      modal.showModal();
+    };
+
+    modal.addEventListener("close", remember);
+
+    modal.querySelector("[data-modal-cta]")?.addEventListener("click", () => {
+      modal.close();
+    });
+
+    document.querySelectorAll("[data-modal-open]").forEach((trigger) => {
+      trigger.addEventListener("click", open);
+    });
+
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      const is_outside = (event: PointerEvent) => {
+        const rect = modal.getBoundingClientRect();
+        return (
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        );
+      };
+
+      let pressed_outside = false;
+
+      modal.addEventListener("pointerdown", (event) => {
+        pressed_outside = is_outside(event);
+      });
+
+      modal.addEventListener("pointerup", (event) => {
+        if (pressed_outside && is_outside(event)) modal.close();
+      });
+    }
+
+    if (!was_seen()) {
+      window.setTimeout(open, delay);
+    }
+  }
+</script>

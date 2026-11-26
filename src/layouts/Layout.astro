@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Contact from "../components/Contact.astro";
 import FixedReserve from "../components/FixedReserve.astro";
+import Modal from "../components/Modal.astro";
 import { SITE, build_title } from "../lib/site";
 
 interface Props {
@@ -67,5 +68,6 @@ const social_image = new URL(image, Astro.site ?? Astro.url).href;
     </main>
     <Contact />
     <FixedReserve />
+    <Modal />
   </body>
 </html>

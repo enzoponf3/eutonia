@@ -238,3 +238,58 @@ The full suite is red because of three pre-existing `src/lib/site.ts` versus
 test-expectation mismatches (`home_title`, `HERO.title`) unrelated to this
 follow-up. Git Bash also cannot see `node` in this environment, so tests were
 run with `npm test` from PowerShell.
+
+# Configurable promo modal (feature 21) - COMPLETED
+
+**Date**: Thu Nov 26 2026
+
+## What was done:
+- Added `MODAL` to `src/lib/site.ts`: enabled flag, promo image and alt text,
+  eyebrow, title, description, `Reservar` call to action, open delay and the
+  session storage key used to remember a dismissal.
+- New `src/components/Modal.astro`, mounted once from `src/layouts/Layout.astro`:
+  - native `<dialog>` opened with `showModal()`, `closedby="any"` plus a
+    pointer based light dismiss fallback for browsers without `closedby`;
+  - centred by the browser (`m-auto`) over a darker `::backdrop`;
+  - close button at the top right, implemented as a `<form method="dialog">`
+    submit so no JavaScript is needed to close;
+  - promo image on the left, text block on the right from the `md` breakpoint
+    up (`hidden md:flex`), so the title, description and button are only shown
+    in desktop view while the image still reaches mobile;
+  - opens automatically after `MODAL.delay_ms` once per browser session and can
+    be reopened from any element carrying `data-modal-open`;
+  - the CTA closes the dialog before following `/#reservar`.
+- Added top layer entry animation to `src/styles/global.css` using
+  `@starting-style` and `transition-behavior: allow-discrete`, with
+  `overscroll-behavior: contain` on the dialog and its backdrop and a shortened
+  transition under `prefers-reduced-motion: reduce`.
+- Added `tests/modal.test.ts` covering the configuration, markup, behaviour
+  hooks, styles and layout mounting.
+
+## Verification Results:
+```
+./init.sh (run through Git Bash) : all checks passed, 156 tests passed
+npm run check                    : 0 errors, 0 warnings, 0 hints
+npm run build                    : 3 pages built, sitemap generated
+built HTML                       : <dialog> rendered with closedby, labelled and
+                                   described ids on all three pages
+built CSS                        : @starting-style blocks and promo-modal rules
+                                   present; Tailwind emitted md:grid-cols-2,
+                                   md:flex, m-auto and max-h-[85dvh]
+```
+
+## Notes:
+- `./init.sh` must be run with Git Bash in this environment: the default shell
+  is WSL and does not resolve the Windows `node.exe`.
+- `public/og/eutonia-meditacion.jpg` appeared modified in `git status` during
+  the session. It was not touched by this work and was left as found.
+
+## Follow-up: modal frequency
+
+- Added `show_once` to the `MODAL` configuration. It defaults to `false`, so the
+  modal opens on every page load after the configured delay.
+- The session storage key is only read and written when `show_once` is `true`,
+  which keeps the old "once per session" behaviour available as a one line
+  change in `src/lib/site.ts`.
+- `tests/modal.test.ts` updated (157 tests) and `./init.sh`, `npm run check`
+  and `npm run build` pass.

@@ -236,6 +236,57 @@
   }
 }
 
+.promo-modal {
+  overscroll-behavior: contain;
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-behavior: allow-discrete;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .promo-modal {
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+.promo-modal[open] {
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .promo-modal[open] {
+    transform: translateY(0) scale(1);
+
+    @starting-style {
+      transform: translateY(14px) scale(0.98);
+    }
+  }
+}
+
+.promo-modal::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgb(28 25 23 / 0);
+  transition-property: background-color, display, overlay;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+}
+
+.promo-modal[open]::backdrop {
+  background-color: rgb(28 25 23 / 0.75);
+
+  @starting-style {
+    background-color: rgb(28 25 23 / 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-hero,
   .js .gerda-reveal .gerda-img,
@@ -255,6 +306,10 @@
   .reviews-track,
   .reviews-slide {
     transition: none !important;
+  }
+
+  .promo-modal {
+    transition-duration: 100ms;
   }
 
   .reserve-pulse::after {

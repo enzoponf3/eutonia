@@ -351,6 +351,23 @@ export const REVIEWS = {
 } as const;
 
 
+export const MODAL = {
+  enabled: true,
+  show_once: false,
+  storage_key: "eutonia-promo-verano",
+  delay_ms: 1500,
+  image: "/photos/promocion.png",
+  image_alt:
+    "Promoción de verano: 2x1 en el mes de práctica, martes 19.30 hs en " +
+    "GymDance, Victoria, facilitado por la Lic. Andrea Bello.",
+  eyebrow: "Promoción de verano",
+  title: "2 x 1 en el mes de práctica",
+  description:
+    "Diciembre y enero. Martes 19.30 hs en GymDance, Victoria. " +
+    "Reservá tu lugar y vení con quien quieras.",
+  cta: { label: "Reservar", href: build_whatsapp_url(SITE.phone) },
+} as const;
+
 export function build_whatsapp_url(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   if (digits.length < 10) {
