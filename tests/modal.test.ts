@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { ACTIONS, MODAL } from "../src/lib/site";
+import { CONTACT, MODAL } from "../src/lib/site";
 
 const ROOT = process.cwd();
 
@@ -25,7 +25,7 @@ describe("MODAL configuration", () => {
     expect(MODAL.title.trim().length).toBeGreaterThan(0);
     expect(MODAL.description.trim().length).toBeGreaterThan(20);
     expect(MODAL.cta.label).toBe("Reservar");
-    expect(MODAL.cta.href).toBe(ACTIONS.primary.href);
+    expect(MODAL.cta.href).toBe(CONTACT.whatsapp_url);
   });
 
   it("waits before opening and keeps the dismissal key for opt-in sessions", () => {
@@ -71,8 +71,8 @@ describe("modal markup", () => {
     expect(text).toBeGreaterThan(image);
   });
 
-  it("only shows the text information on desktop", () => {
-    expect(modal).toContain("hidden flex-col");
+  it("lays the text information beside the image from md up", () => {
+    expect(modal).toContain("flex-col justify-center");
     expect(modal).toContain("md:flex");
     expect(modal).toContain("MODAL.eyebrow");
     expect(modal).toContain("MODAL.description");
@@ -108,8 +108,42 @@ describe("modal markup", () => {
     expect(modal).toContain("modal.close()");
   });
 
+  it("links the promo image to WhatsApp in mobile view", () => {
+    const anchors = modal.match(/<a[\s\S]*?<\/a>/g) ?? [];
+    const image_link = anchors.find((anchor) =>
+      anchor.includes("data-modal-image-link"),
+    );
+
+    expect(image_link).toBeDefined();
+    expect(image_link).toContain("CONTACT.whatsapp_url");
+    expect(image_link).toContain("MODAL.image");
+    expect(image_link).toContain('target="_blank"');
+    expect(image_link).toContain('rel="noopener noreferrer"');
+    expect(image_link).toContain(
+      'aria-label="Escribir por WhatsApp para reservar la promoción"',
+    );
+    expect(modal.indexOf('<div class="md:hidden">')).toBeGreaterThan(-1);
+    expect(modal.indexOf("data-modal-image-link")).toBeGreaterThan(
+      modal.indexOf('<div class="md:hidden">'),
+    );
+  });
+
+  it("keeps the desktop image out of the WhatsApp link", () => {
+    const anchors = modal.match(/<a[\s\S]*?<\/a>/g) ?? [];
+    const desktop_image = anchors.find((anchor) =>
+      anchor.includes("md:block md:max-h-[85dvh]"),
+    );
+
+    expect(desktop_image).toBeUndefined();
+    expect(modal).toContain(
+      'class="hidden h-auto w-full object-contain md:block md:max-h-[85dvh]"',
+    );
+  });
+
   it("closes before following the call to action", () => {
-    expect(modal).toContain("[data-modal-cta]");
+    expect(modal).toContain(
+      '"[data-modal-cta], [data-modal-image-link]"',
+    );
     expect(modal.indexOf("[data-modal-cta]")).toBeLessThan(
       modal.indexOf("modal.close()"),
     );
